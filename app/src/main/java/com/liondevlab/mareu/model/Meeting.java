@@ -19,7 +19,7 @@ public class Meeting implements Serializable {
 	private String subject;
 
 	/** Location */
-	private MeetingRoom location;
+	private MeetingRoom meetingRoom;
 
 	/** Begin time */
 	private Date startTime;
@@ -34,10 +34,10 @@ public class Meeting implements Serializable {
 	/**
 	 * Constructor
 	 */
-	public Meeting(long id, String subject, MeetingRoom location, Date startTime, Date endTime, List<MeetingParticipant> participants) {
+	public Meeting(long id, String subject, MeetingRoom meetingRoom, Date startTime, Date endTime, List<MeetingParticipant> participants) {
 		this.id = id;
 		this.subject = subject;
-		this.location = location;
+		this.meetingRoom = meetingRoom;
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.participants = participants;
@@ -60,15 +60,15 @@ public class Meeting implements Serializable {
 	}
 
 	public MeetingRoom getLocation() {
-		return location;
+		return meetingRoom;
 	}
 
 	public String getMeetingRoom() {
-		return location.toString();
+		return meetingRoom.toString();
 	}
 
 	public void setLocation(MeetingRoom location) {
-		this.location = location;
+		this.meetingRoom = location;
 	}
 
 	public Date getStartTime() {

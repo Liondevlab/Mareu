@@ -4,6 +4,7 @@ import com.liondevlab.mareu.model.Meeting;
 import com.liondevlab.mareu.model.MeetingParticipant;
 import com.liondevlab.mareu.model.MeetingRoom;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,9 +14,9 @@ import java.util.List;
 public interface MeetingApiService {
 	/**
 	 * Get Meetings
-	 * @return {@link List}
+	 * @return {@link ArrayList}
 	 */
-	List<Meeting> getMeetings();
+	ArrayList<Meeting> getMeetings();
 
 	/**
 	 * Create a Meeting

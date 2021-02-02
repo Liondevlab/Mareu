@@ -4,6 +4,7 @@ import com.liondevlab.mareu.model.Meeting;
 import com.liondevlab.mareu.model.MeetingParticipant;
 import com.liondevlab.mareu.model.MeetingRoom;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,12 +13,12 @@ import java.util.List;
  */
 public class DummyMeetingApiService implements MeetingApiService{
 
-	private List<Meeting> mMeetings = DummyMeetingGenerator.generateMeetings();
+	private ArrayList<Meeting> mMeetings = DummyMeetingGenerator.generateMeetings();
 	private List<MeetingRoom> mMeetingRooms = DummyMeetingGenerator.generateMeetingRooms();
 	private List<MeetingParticipant> mMeetingParticipants = DummyMeetingGenerator.generateMeetingParticipants();
 
 	@Override
-	public List<Meeting> getMeetings() {
+	public ArrayList<Meeting> getMeetings() {
 		return mMeetings;
 	}
 

@@ -1,41 +1,55 @@
 package com.liondevlab.mareu.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.liondevlab.mareu.R;
 import com.liondevlab.mareu.di.DI;
 import com.liondevlab.mareu.model.Meeting;
-import com.liondevlab.mareu.model.MeetingRoom;
 import com.liondevlab.mareu.service.MeetingApiService;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class MeetingListActivity extends AppCompatActivity {
+public class MeetingListActivity extends AppCompatActivity implements MeetingRecyclerInterface{
 
 	// User Interface elements
-	Toolbar mToolbar;
 	RecyclerView mRecyclerView;
 	FloatingActionButton mCreateMeetingButton;
 	MeetingsRecyclerViewAdapter mMeetingsRecyclerViewAdapter;
 	MeetingApiService mMeetingApiService = DI.getMeetingApiService();
-	List<Meeting> mMeetingListAsArray = new ArrayList<>();
-	MeetingRoom  mMeetingRoom;
+	ArrayList<Meeting> mMeetingListAsArray = new ArrayList<>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_meeting_list);
-		mToolbar = findViewById(R.id.toolbar);
+		this.configureToolbar();
 		mRecyclerView = findViewById(R.id.list_meetings);
-		mCreateMeetingButton = findViewById(R.id.create_meeting);
-		setSupportActionBar(mToolbar);
+		mCreateMeetingButton = findViewById(R.id.create_meeting_button);
 		initList();
+		mCreateMeetingButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent createMeetingIntent = new Intent(getApplicationContext(), CreateMeetingActivity.class);
+				startActivity(createMeetingIntent);
+			}
+		});
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.meeting_menu, menu);
+		return true;
 	}
 
 	/**
@@ -43,7 +57,8 @@ public class MeetingListActivity extends AppCompatActivity {
 	 */
 	private void initList() {
 		mMeetingListAsArray = mMeetingApiService.getMeetings();
-		mRecyclerView.setAdapter(new MeetingsRecyclerViewAdapter(mMeetingListAsArray));
+		mMeetingsRecyclerViewAdapter = new MeetingsRecyclerViewAdapter(mMeetingListAsArray, this);
+		mRecyclerView.setAdapter(mMeetingsRecyclerViewAdapter);
 /*
 		mMeetingListAsArray.clear();
 		mMeetingListAsArray.add();
@@ -51,18 +66,32 @@ public class MeetingListActivity extends AppCompatActivity {
 */
 	}
 
+	private void configureToolbar() {
+		Toolbar toolbar = findViewById(R.id.meeting_toolbar);
+		setSupportActionBar(toolbar);
+	}
+
 	@Override
-	public void onResume() {
-		super.onResume();
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId() == R.id.item_meeting_filter) {
+			showEditDialog();
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
 
-	}
-	private void setSupportActionBar(Toolbar toolbar) {
+	private void showEditDialog() {
+		FragmentManager fm = getSupportFragmentManager();
+		MeetingFilteringDialog editNameDialogFragment = MeetingFilteringDialog.newInstance("Some Title");
+		editNameDialogFragment.show(fm, "meeting_filter_dialog");
 	}
 
-	/**
-	@OnClick(R.id.create_meeting)
-	void createMeeting() {
-		CreateMeetingActivity.navigate(this);
+	@Override
+	public void deleteMeeting(Meeting meeting) {
+		mMeetingApiService.deleteMeeting(meeting);
+		mMeetingListAsArray.clear();
+		mMeetingListAsArray.addAll(mMeetingApiService.getMeetings());
+		Log.d("TOTO", "deleteMeeting: " + mMeetingListAsArray.size());
+		mMeetingsRecyclerViewAdapter.notifyDataSetChanged();
 	}
-	*/
 }

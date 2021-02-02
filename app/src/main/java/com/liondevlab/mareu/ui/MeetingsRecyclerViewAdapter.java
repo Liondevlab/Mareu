@@ -4,6 +4,7 @@ package com.liondevlab.mareu.ui;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.liondevlab.mareu.R;
 import com.liondevlab.mareu.model.Meeting;
 import com.liondevlab.mareu.model.MeetingParticipant;
-import com.liondevlab.mareu.model.MeetingRoom;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -24,12 +24,13 @@ import java.util.List;
 public class MeetingsRecyclerViewAdapter extends RecyclerView.Adapter<MeetingsRecyclerViewAdapter.ViewHolder> {
 
     private List<Meeting> mMeetingList;
-    MeetingsRecyclerViewAdapter(List<Meeting> items) {
-        mMeetingList = items;
+    private MeetingRecyclerInterface mMeetingRecyclerInterface;
+    MeetingsRecyclerViewAdapter(List<Meeting> items, MeetingRecyclerInterface pMeetingRecyclerInterface) {
+    	mMeetingList = items;
+    	mMeetingRecyclerInterface = pMeetingRecyclerInterface;
     }
 
-    MeetingRoom mMeetingRoom;
-
+    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_meeting, parent, false);
@@ -37,14 +38,21 @@ public class MeetingsRecyclerViewAdapter extends RecyclerView.Adapter<MeetingsRe
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Meeting meeting = mMeetingList.get(position);
-
-	    Date startTime = meeting.getStartTime();
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
+        final Meeting meeting = mMeetingList.get(position);
+        Date startTime = meeting.getStartTime();
 	    DateFormat dateFormat = new SimpleDateFormat("dd/MM HH:mm");
 	    String strStartTime = dateFormat.format(startTime);
 	    holder.mItemMeetingInfo.setText(holder.itemView.getContext().getString(R.string.item_meeting_infos, meeting.getName(), strStartTime, meeting.getLocation().getRoomName()));
 	    holder.mItemListParticipants.setText(getMeetingParticipantsListToString(meeting.getParticipants()));
+        holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
+	        @Override
+	        public void onClick(View v) {
+				mMeetingRecyclerInterface.deleteMeeting(meeting);
+	        }
+        });
+
+
         /**
          *
 		 *RED, GREEN, BLUE, PINK, PEACH, YELLOW, ORANGE, PURPLE, LIGHT_BLUE, DARK_RED
@@ -100,11 +108,13 @@ public class MeetingsRecyclerViewAdapter extends RecyclerView.Adapter<MeetingsRe
         return mMeetingList.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+
+	public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView mItemMeetingAvatar;
         TextView mItemMeetingInfo;
         TextView mItemListParticipants;
         ImageButton mDeleteButton;
+        Button mCreateMeetingButton;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -112,6 +122,7 @@ public class MeetingsRecyclerViewAdapter extends RecyclerView.Adapter<MeetingsRe
             mItemMeetingInfo = itemView.findViewById(R.id.item_meeting_info);
             mItemListParticipants = itemView.findViewById(R.id.item_list_participants);
             mDeleteButton = itemView.findViewById(R.id.item_list_delete_button);
+            mCreateMeetingButton = itemView.findViewById(R.id.create_meeting_button);
 
         }
     }

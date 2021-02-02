@@ -92,7 +92,7 @@ public abstract class DummyMeetingGenerator {
 	}
 
 	// Returns lists
-	static List<Meeting> generateMeetings (){
+	static ArrayList<Meeting> generateMeetings (){
 		return new ArrayList<>(DUMMY_MEETINGS);
 	}
 
