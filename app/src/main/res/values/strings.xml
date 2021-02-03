@@ -8,12 +8,14 @@
     <string name="validate_filter">Valider</string>
     <string name="new_meeting_button">New meeting Button</string>
     <string name="create_meeting_title">Nouvelle réunion</string>
+    <string name="create_meeting_default_text_for_blank">Saisir ici...</string>
     <string name="create_meeting_subject">Sujet:</string>
     <string name="create_meeting_room_select">Salle:</string>
     <string name="create_meeting_start_select">Début:</string>
     <string name="create_meeting_end_select">Fin:</string>
     <string name="create_meeting_participants_select">Participants:</string>
-    <string name="create_meeting_add_participant_button">Ok</string>
+    <string name="create_meeting_add_participant_button"> + </string>
+    <string name="create_meeting_participant_added_email">%1$s</string>
     <string name="create_meeting_cancel_button">Annuler</string>
     <string name="create_meeting_validate_button">Valider</string>
 </resources>

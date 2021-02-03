@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +18,8 @@ public class CreateMeetingActivity extends AppCompatActivity /*implements Adapte
 
 	MeetingApiService mMeetingApiService = DI.getMeetingApiService();
 	Spinner mRoomSpinner;
+	TimePicker mStartTimePicker;
+	TimePicker mEndTimePicker;
 	private Button mValidateButton;
 
 	@Override
@@ -25,7 +28,11 @@ public class CreateMeetingActivity extends AppCompatActivity /*implements Adapte
 		setContentView(R.layout.activity_create_meeting);
 		mValidateButton = findViewById(R.id.create_meeting_validate_button);
 		mRoomSpinner = findViewById(R.id.create_meeting_room_spinner);
+		mStartTimePicker = findViewById(R.id.create_meeting_start_time_picker);
+		mEndTimePicker = findViewById(R.id.create_meeting_end_time_picker);
 		/*mRoomSpinner.setOnItemSelectedListener(this);*/
+		mStartTimePicker.setIs24HourView(true);
+		mEndTimePicker.setIs24HourView(true);
 		addRoomsInSpinner();
 		addListenerOnButton();
 	}
