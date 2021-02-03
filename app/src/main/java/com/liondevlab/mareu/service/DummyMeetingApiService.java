@@ -19,7 +19,7 @@ public class DummyMeetingApiService implements MeetingApiService{
 
 	@Override
 	public ArrayList<Meeting> getMeetings() {
-		return mMeetings;
+		return new ArrayList<>(mMeetings);
 	}
 
 	@Override

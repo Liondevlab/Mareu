@@ -12,7 +12,8 @@
     <string name="create_meeting_room_select">Salle:</string>
     <string name="create_meeting_start_select">Début:</string>
     <string name="create_meeting_end_select">Fin:</string>
-    <string name="create_meeting_participants_select">Participants;</string>
+    <string name="create_meeting_participants_select">Participants:</string>
+    <string name="create_meeting_add_participant_button">Ok</string>
     <string name="create_meeting_cancel_button">Annuler</string>
     <string name="create_meeting_validate_button">Valider</string>
 </resources>

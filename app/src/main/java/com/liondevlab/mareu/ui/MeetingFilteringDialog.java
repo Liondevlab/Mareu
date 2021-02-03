@@ -66,7 +66,6 @@ public class MeetingFilteringDialog extends DialogFragment {
 
 
 	@Override
-
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 		mRoomSpinner = view.findViewById(R.id.filter_meeting_room_spinner);
