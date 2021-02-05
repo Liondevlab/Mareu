@@ -74,16 +74,16 @@ public class MeetingListActivity extends AppCompatActivity implements MeetingRec
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == R.id.item_meeting_filter) {
-			showEditDialog();
+			showMeetingFilteringDialog();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
 
-	private void showEditDialog() {
+	private void showMeetingFilteringDialog() {
 		FragmentManager fm = getSupportFragmentManager();
-		MeetingFilteringDialog editNameDialogFragment = MeetingFilteringDialog.newInstance("Some Title");
-		editNameDialogFragment.show(fm, "meeting_filter_dialog");
+		MeetingFilteringDialog meetingFilteringDialog = MeetingFilteringDialog.newInstance("filter dialog");
+		meetingFilteringDialog.show(fm, "meeting_filter_dialog");
 	}
 
 	@Override

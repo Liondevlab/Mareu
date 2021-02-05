@@ -5,6 +5,7 @@ import com.liondevlab.mareu.model.MeetingParticipant;
 import com.liondevlab.mareu.model.MeetingRoom;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -17,6 +18,12 @@ public interface MeetingApiService {
 	 * @return {@link ArrayList}
 	 */
 	ArrayList<Meeting> getMeetings();
+
+	/**
+	 * Get Meetings
+	 * @return {@link ArrayList}
+	 */
+	ArrayList<Meeting> getFilteredMeetings(boolean isFilteredByRoom, String roomFiltered, boolean isFilteredByDate, Date DateFiltered);
 
 	/**
 	 * Create a Meeting

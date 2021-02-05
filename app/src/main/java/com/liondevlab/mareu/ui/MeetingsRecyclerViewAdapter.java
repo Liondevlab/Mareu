@@ -51,12 +51,6 @@ public class MeetingsRecyclerViewAdapter extends RecyclerView.Adapter<MeetingsRe
 				mMeetingRecyclerInterface.deleteMeeting(meeting);
 	        }
         });
-
-
-        /**
-         *
-		 *RED, GREEN, BLUE, PINK, PEACH, YELLOW, ORANGE, PURPLE, LIGHT_BLUE, DARK_RED
-		 */
         switch (meeting.getLocation().getAvatarColor()) {
             case RED:
                 holder.mItemMeetingAvatar.setColorFilter(0xFFED2939);
