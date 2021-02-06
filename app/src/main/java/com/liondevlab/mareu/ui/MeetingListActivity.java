@@ -19,8 +19,9 @@ import com.liondevlab.mareu.model.Meeting;
 import com.liondevlab.mareu.service.MeetingApiService;
 
 import java.util.ArrayList;
+import java.util.Date;
 
-public class MeetingListActivity extends AppCompatActivity implements MeetingRecyclerInterface{
+public class MeetingListActivity extends AppCompatActivity implements MeetingRecyclerInterface,MeetingFilteringDialog.OnValidateFilterListener  {
 
 	// User Interface elements
 	RecyclerView mRecyclerView;
@@ -87,6 +88,13 @@ public class MeetingListActivity extends AppCompatActivity implements MeetingRec
 	}
 
 	@Override
+	public void onValidateFilter(boolean pRoomFilterChecked, String pRoomFilteredName, boolean pDateFilterChecked, Date pDateFiltered) {
+		mMeetingListAsArray.clear();
+		mMeetingListAsArray.addAll(mMeetingApiService.getFilteredMeetings(pRoomFilterChecked, pRoomFilteredName, pDateFilterChecked, pDateFiltered));
+		mMeetingsRecyclerViewAdapter.notifyDataSetChanged();
+	}
+
+	@Override
 	public void deleteMeeting(Meeting meeting) {
 		mMeetingApiService.deleteMeeting(meeting);
 		mMeetingListAsArray.clear();
@@ -94,4 +102,5 @@ public class MeetingListActivity extends AppCompatActivity implements MeetingRec
 		Log.d("TOTO", "deleteMeeting: " + mMeetingListAsArray.size());
 		mMeetingsRecyclerViewAdapter.notifyDataSetChanged();
 	}
+
 }

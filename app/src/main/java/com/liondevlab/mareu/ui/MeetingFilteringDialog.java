@@ -1,5 +1,7 @@
 package com.liondevlab.mareu.ui;
 
+import android.app.Activity;
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -13,7 +15,6 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
@@ -33,7 +34,7 @@ public class MeetingFilteringDialog extends DialogFragment {
 	DatePicker mDatePicker;
 	CheckBox mRoomFilterCheckBox, mDateFilterCheckBox;
 	private Button mValidateButton, mCancelButton;
-
+	private OnValidateFilterListener mOnValidateFilterListener;
 
 	public void EditNameDialogFragment() {
 		// Empty constructor is required for DialogFragment
@@ -60,8 +61,6 @@ public class MeetingFilteringDialog extends DialogFragment {
 		return view;
 	}
 
-
-
 	@Override
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
@@ -75,6 +74,22 @@ public class MeetingFilteringDialog extends DialogFragment {
 		addRoomsInSpinner();
 		addListenerOnCheckBox();
 		addListenerOnButton();
+	}
+
+	@Override
+	public void onAttach(Context context) {
+		super.onAttach(context);
+		Activity activity;
+		if (context instanceof Activity) activity = (Activity) context;
+		try {
+			this.mOnValidateFilterListener = (OnValidateFilterListener)context;
+		} catch (final ClassCastException e) {
+			throw new ClassCastException(context.toString() + " must implement OnValidateFilterListener");
+		}
+	}
+
+	public interface OnValidateFilterListener {
+		void onValidateFilter(boolean pRoomFilterChecked, String pRoomFilteredName, boolean pDateFilterChecked, Date pDateFiltered);
 	}
 
 	public void addRoomsInSpinner() {
@@ -95,8 +110,7 @@ public class MeetingFilteringDialog extends DialogFragment {
 	public void addListenerOnButton() {
 		mRoomSpinner = mRoomSpinner.findViewById(R.id.filter_meeting_room_spinner);
 		mDatePicker = mDatePicker.findViewById(R.id.filter_date_datepicker);
-		final String vRoomToSendToFilter = mRoomSpinner.getSelectedItem().toString();
-		final Date vDateToSendToFilter = getDateFromDatePicker(mDatePicker);
+		final OnValidateFilterListener vOnValidateFilterListener = this.mOnValidateFilterListener;
 		mCancelButton = mCancelButton.findViewById(R.id.cancel_filter_button);
 		mCancelButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -108,19 +122,9 @@ public class MeetingFilteringDialog extends DialogFragment {
 		mValidateButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (mRoomFilterCheckBox.isChecked() || mDateFilterCheckBox.isChecked()){
-					if (mRoomFilterCheckBox.isChecked() && mDateFilterCheckBox.isChecked()) {
-						mMeetingApiService.getFilteredMeetings(true, vRoomToSendToFilter, true, vDateToSendToFilter);
-					} else if (mRoomFilterCheckBox.isChecked()) {
-						mMeetingApiService.getFilteredMeetings(true, vRoomToSendToFilter, false, null);
-					} else if (mDateFilterCheckBox.isChecked()) {
-						mMeetingApiService.getFilteredMeetings(false, null, true, vDateToSendToFilter);
-					} else {
-						Toast.makeText(getActivity(), "Aucun filtre n'est sélectionné!", Toast.LENGTH_LONG).show();
-					}
-				} else {
-					Toast.makeText(getActivity(), "Aucun filtre n'est sélectionné!", Toast.LENGTH_LONG).show();
-				}
+				final String vRoomToSendToFilter = mRoomSpinner.getSelectedItem().toString();
+				final Date vDateToSendToFilter = getDateFromDatePicker(mDatePicker);
+				vOnValidateFilterListener.onValidateFilter(mRoomFilterCheckBox.isChecked(), vRoomToSendToFilter, mDateFilterCheckBox.isChecked(), vDateToSendToFilter);
 				dismiss();
 			}
 		});
