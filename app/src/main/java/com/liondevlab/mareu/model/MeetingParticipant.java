@@ -31,6 +31,10 @@ public class MeetingParticipant implements Serializable {
 		this.participantEmail = participantEmail;
 	}
 
+	public MeetingParticipant(String participantEmail) {
+		this.participantEmail = participantEmail;
+	}
+
 	public long getId() {
 		return id;
 	}

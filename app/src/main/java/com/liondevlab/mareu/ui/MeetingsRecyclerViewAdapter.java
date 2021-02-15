@@ -43,7 +43,7 @@ public class MeetingsRecyclerViewAdapter extends RecyclerView.Adapter<MeetingsRe
         Date startTime = meeting.getStartTime();
 	    DateFormat dateFormat = new SimpleDateFormat("dd/MM HH:mm");
 	    String strStartTime = dateFormat.format(startTime);
-	    holder.mItemMeetingInfo.setText(holder.itemView.getContext().getString(R.string.item_meeting_infos, meeting.getName(), strStartTime, meeting.getLocation().getRoomName()));
+	    holder.mItemMeetingInfo.setText(holder.itemView.getContext().getString(R.string.item_meeting_infos, meeting.getSubject(), strStartTime, meeting.getLocation().getRoomName()));
 	    holder.mItemListParticipants.setText(getMeetingParticipantsListToString(meeting.getParticipants()));
         holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
 	        @Override

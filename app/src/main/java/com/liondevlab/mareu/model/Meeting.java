@@ -43,6 +43,15 @@ public class Meeting implements Serializable {
 		this.participants = participants;
 	}
 
+	public Meeting(String subject, Date startTime, Date endTime) {
+		this.subject = subject;
+		this.startTime = startTime;
+		this.endTime = endTime;
+	}
+
+	public Meeting() {
+	}
+
 	public long getId() {
 		return id;
 	}
@@ -51,12 +60,12 @@ public class Meeting implements Serializable {
 		this.id = id;
 	}
 
-	public String getName() {
+	public String getSubject() {
 		return subject;
 	}
 
-	public void setName(String name) {
-		this.subject = name;
+	public void setSubject(String subject) {
+		this.subject = subject;
 	}
 
 	public MeetingRoom getLocation() {

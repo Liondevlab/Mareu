@@ -31,6 +31,11 @@ public class MeetingRoom implements Serializable {
 		this.avatarColor = avatarColor;
 	}
 
+	public MeetingRoom(String roomName, MeetingRoomColor avatarColor) {
+		this.roomName = roomName;
+		this.avatarColor = avatarColor;
+	}
+
 	public long getId() {
 		return id;
 	}

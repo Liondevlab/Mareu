@@ -2,7 +2,6 @@ package com.liondevlab.mareu.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,6 +28,10 @@ public class MeetingListActivity extends AppCompatActivity implements MeetingRec
 	MeetingsRecyclerViewAdapter mMeetingsRecyclerViewAdapter;
 	MeetingApiService mMeetingApiService = DI.getMeetingApiService();
 	ArrayList<Meeting> mMeetingListAsArray = new ArrayList<>();
+	boolean mRoomFilterChecked = false;
+	boolean mDateFilterChecked = false;
+	String mRoomFilteredName;
+	Date mDateFiltered;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -57,16 +60,18 @@ public class MeetingListActivity extends AppCompatActivity implements MeetingRec
 	 * Initializing list of meetings
 	 */
 	private void initList() {
-		mMeetingListAsArray = mMeetingApiService.getMeetings();
+		mMeetingListAsArray.clear();
+		mMeetingListAsArray.addAll(mMeetingApiService.getFilteredMeetings(mRoomFilterChecked, mRoomFilteredName, mDateFilterChecked, mDateFiltered));
 		mMeetingsRecyclerViewAdapter = new MeetingsRecyclerViewAdapter(mMeetingListAsArray, this);
 		mRecyclerView.setAdapter(mMeetingsRecyclerViewAdapter);
-/*
-		mMeetingListAsArray.clear();
-		mMeetingListAsArray.add();
-		mMeetingListAsArray.addAll(mMeetingApiService.getMeetings());
-*/
+		mMeetingsRecyclerViewAdapter.notifyDataSetChanged();
 	}
 
+	@Override
+	public void onResume() {
+		super.onResume();
+		initList();
+	}
 	private void configureToolbar() {
 		Toolbar toolbar = findViewById(R.id.meeting_toolbar);
 		setSupportActionBar(toolbar);
@@ -89,9 +94,11 @@ public class MeetingListActivity extends AppCompatActivity implements MeetingRec
 
 	@Override
 	public void onValidateFilter(boolean pRoomFilterChecked, String pRoomFilteredName, boolean pDateFilterChecked, Date pDateFiltered) {
-		mMeetingListAsArray.clear();
-		mMeetingListAsArray.addAll(mMeetingApiService.getFilteredMeetings(pRoomFilterChecked, pRoomFilteredName, pDateFilterChecked, pDateFiltered));
-		mMeetingsRecyclerViewAdapter.notifyDataSetChanged();
+		mRoomFilterChecked = pRoomFilterChecked;
+		mRoomFilteredName = pRoomFilteredName;
+		mDateFilterChecked = pDateFilterChecked;
+		mDateFiltered = pDateFiltered;
+		initList();
 	}
 
 	@Override
@@ -99,7 +106,6 @@ public class MeetingListActivity extends AppCompatActivity implements MeetingRec
 		mMeetingApiService.deleteMeeting(meeting);
 		mMeetingListAsArray.clear();
 		mMeetingListAsArray.addAll(mMeetingApiService.getMeetings());
-		Log.d("TOTO", "deleteMeeting: " + mMeetingListAsArray.size());
 		mMeetingsRecyclerViewAdapter.notifyDataSetChanged();
 	}
 

@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- TextViews -->
-    <dimen name="size_title">35sp</dimen>
+    <dimen name="size_title">30sp</dimen>
     <dimen name="size_default_text">20sp</dimen>
-    <dimen name="padding_title">40dip</dimen>
-    <dimen name="margin_blocks">10sp</dimen>
+    <dimen name="size_default_text_item">16sp</dimen>
+    <dimen name="size_small_text_item">12sp</dimen>
+    <dimen name="padding">5dp</dimen>
+    <dimen name="margin_blocks">10dp</dimen>
 </resources>

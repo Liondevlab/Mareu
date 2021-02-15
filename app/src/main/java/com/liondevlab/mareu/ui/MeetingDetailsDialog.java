@@ -1,12 +1,12 @@
 package com.liondevlab.mareu.ui;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
 
 import com.liondevlab.mareu.R;
 
@@ -15,7 +15,7 @@ import com.liondevlab.mareu.R;
  * Use the {@link MeetingDetailsDialog#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MeetingDetailsDialog extends Fragment {
+public class MeetingDetailsDialog extends DialogFragment {
 
 	// TODO: Rename parameter arguments, choose names that match
 	// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -61,6 +61,6 @@ public class MeetingDetailsDialog extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	                         Bundle savedInstanceState) {
 		// Inflate the layout for this fragment
-		return inflater.inflate(R.layout.meeting_details_dialog, container, false);
+		return inflater.inflate(R.layout.dialog_box_meeting_details, container, false);
 	}
 }

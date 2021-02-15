@@ -49,16 +49,16 @@ public abstract class DummyMeetingGenerator {
 	);
 
 	public static List<Meeting> DUMMY_MEETINGS = Arrays.asList(
-			new Meeting(0, "Treasury", DUMMY_MEETINGROOMS.get(3), setStartTime("15/02 14:00"),
-					setEndTime("15/02 15:00"), getReunionParticipantsById(1, 3, 5, 7, 9, 11)),
-			new Meeting(1, "Information", DUMMY_MEETINGROOMS.get(0), setStartTime("15/02 16:00"),
-					setEndTime("15/02 17:30"), getReunionParticipantsById(0, 2, 4, 6, 8, 10)),
-			new Meeting(2, "New Product", DUMMY_MEETINGROOMS.get(1), setStartTime("16/02 19:00"),
-					setEndTime("16/02 21:00"), getReunionParticipantsById(0, 1, 3, 4, 5, 7, 9, 10, 11)),
-			new Meeting(3, "Recruitment", DUMMY_MEETINGROOMS.get(5), setStartTime("19/02 9:00"),
-					setEndTime("19/02 09:30"), getReunionParticipantsById(2, 3, 5, 8, 9, 10)),
-			new Meeting(4, "Evolution", DUMMY_MEETINGROOMS.get(9), setStartTime("20/02 10:00"),
-					setEndTime("20/02 11:30"), getReunionParticipantsById(0, 1, 2, 3, 5, 6, 7, 9, 11))
+			new Meeting(0, "Treasury", DUMMY_MEETINGROOMS.get(3), setStartTime("15/02/21 14:00"),
+					setEndTime("15/02/21 15:00"), getReunionParticipantsById(1, 3, 5, 7, 9, 11)),
+			new Meeting(1, "Information", DUMMY_MEETINGROOMS.get(0), setStartTime("15/02/21 16:00"),
+					setEndTime("15/02/21 17:30"), getReunionParticipantsById(0, 2, 4, 6, 8, 10)),
+			new Meeting(2, "New Product", DUMMY_MEETINGROOMS.get(1), setStartTime("16/02/21 19:00"),
+					setEndTime("16/02/21 21:00"), getReunionParticipantsById(0, 1, 3, 4, 5, 7, 9, 10, 11)),
+			new Meeting(3, "Recruitment", DUMMY_MEETINGROOMS.get(5), setStartTime("19/02/21 9:00"),
+					setEndTime("19/02/21 09:30"), getReunionParticipantsById(2, 3, 5, 8, 9, 10)),
+			new Meeting(4, "Evolution", DUMMY_MEETINGROOMS.get(9), setStartTime("20/02/21 10:00"),
+					setEndTime("20/02/21 11:30"), getReunionParticipantsById(0, 1, 2, 3, 5, 6, 7, 9, 11))
 			);
 
 	// Set Begin and End time for Dummy meetings
@@ -66,7 +66,7 @@ public abstract class DummyMeetingGenerator {
 		Date startTime = new Date();
 		String stringDate = date;
 		try {
-			startTime = new SimpleDateFormat("dd/MM HH:mm", Locale.getDefault()).parse(stringDate);
+			startTime = new SimpleDateFormat("dd/MM/yy HH:mm", Locale.getDefault()).parse(stringDate);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -77,7 +77,7 @@ public abstract class DummyMeetingGenerator {
 		Date endTime = new Date();
 		String stringDate = date;
 		try {
-			endTime = new SimpleDateFormat("dd/MM HH:mm", Locale.getDefault()).parse(stringDate);
+			endTime = new SimpleDateFormat("dd/MM/yy HH:mm", Locale.getDefault()).parse(stringDate);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
