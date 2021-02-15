@@ -64,7 +64,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements CreateMe
 			"Michel@lamzone.com");
 	private Button mValidateButton;
 	private Button mCancelButton;
-	private boolean mIsMeetingOverlaps = false;
+	private boolean mIsMeetingOverlaps;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -133,9 +133,6 @@ public class CreateMeetingActivity extends AppCompatActivity implements CreateMe
 				});
 				mMeetingRoomName = mRoomSpinner.getSelectedItem().toString();
 				generateMeeting();
-				//getIfMeetingOverlaps(mMeetingRoom, mStartTime, mEndTime);
-				Toast.makeText(CreateMeetingActivity.this, "OK", Toast.LENGTH_LONG).show();
-				finish();
 			}
 		});
 		mCancelButton.setOnClickListener(new View.OnClickListener() {
@@ -146,10 +143,18 @@ public class CreateMeetingActivity extends AppCompatActivity implements CreateMe
 		});
 	}
 
-/*	private boolean getIfMeetingOverlaps(MeetingRoom meetingRoom, Date startTime, Date endTime) {
+	private void getIfMeetingOverlaps(MeetingRoom meetingRoom, Date startTime, Date endTime) {
+		mIsMeetingOverlaps = false;
+		for (int i = 0; i < mMeetingApiService.getMeetings().size(); i++){
+			Date existingMeetingBeginTime = mMeetingApiService.getMeetings().get(i).getStartTime();
+			Date existingMeetingEndTime = mMeetingApiService.getMeetings().get(i).getEndTime();
 
-		return mIsMeetingOverlaps;
-	}*/
+			if (meetingRoom.getRoomName().equals(mMeetingApiService.getMeetings().get(i).getLocation().getRoomName())){
+				if (startTime.before(existingMeetingEndTime) && existingMeetingBeginTime.before(endTime))
+				mIsMeetingOverlaps = true;
+			}
+		}
+	}
 
 	private void generateMeeting() {
 		String vSubject = mEditTextSubject.getText().toString();
@@ -161,7 +166,14 @@ public class CreateMeetingActivity extends AppCompatActivity implements CreateMe
 		mMeeting = new Meeting(vSubject, mStartTime, mEndTime);
 		mMeeting.setLocation(mMeetingRoom);
 		mMeeting.setParticipants(mMeetingParticipants);
-		mMeetingApiService.createMeeting(mMeeting);
+		getIfMeetingOverlaps(mMeetingRoom, mStartTime, mEndTime);
+		if (mIsMeetingOverlaps) {
+			Toast.makeText(CreateMeetingActivity.this, "L'horaire sélectionné entre en conflit avec une réunion déjà programmée dans cette salle", Toast.LENGTH_LONG).show();
+		} else {
+			mMeetingApiService.createMeeting(mMeeting);
+			Toast.makeText(CreateMeetingActivity.this, "OK", Toast.LENGTH_LONG).show();
+			finish();
+		}
 	}
 
 	private void generateMeetingRoom(String pRoomName) {
@@ -187,7 +199,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements CreateMe
 				mMeetingRoomColor = MeetingRoomColor.YELLOW;
 				break;
 			case "Wario":
-				mMeetingRoomColor = MeetingRoomColor.ORANGE;
+				mMeetingRoomColor = MeetingRoomColor.DARK_RED;
 				break;
 			case "Waluigi":
 				mMeetingRoomColor = MeetingRoomColor.PURPLE;
@@ -196,7 +208,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements CreateMe
 				mMeetingRoomColor = MeetingRoomColor.LIGHT_BLUE;
 				break;
 			case "Bowser":
-				mMeetingRoomColor = MeetingRoomColor.DARK_RED;
+				mMeetingRoomColor = MeetingRoomColor.ORANGE;
 				break;
 			default:
 				throw new IllegalStateException("Unexpected value: " + mMeetingRoom.getRoomName());
@@ -238,7 +250,6 @@ public class CreateMeetingActivity extends AppCompatActivity implements CreateMe
 			String vParticipant = participant.get(i);
 			MeetingParticipant vMeetingParticipant = new MeetingParticipant(vParticipant);
 			mMeetingParticipants.add(vMeetingParticipant);
-
 		}
 		return mMeetingParticipants;
 	}
@@ -258,7 +269,6 @@ public class CreateMeetingActivity extends AppCompatActivity implements CreateMe
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		/*mParticipantSelected = mSearchParticipant.getOnItemSelectedListener();*/
 		mParticipantSelected = parent.getItemAtPosition(position).toString();
 		if (mParticipantsAdded.contains(mParticipantSelected)) {
 			Toast.makeText(CreateMeetingActivity.this, "L'utilisateur est déja dans la liste...", Toast.LENGTH_LONG).show();
