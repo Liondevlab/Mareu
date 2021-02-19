@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context=".ui.CreateMeetingActivity">
 
-    <androidx.core.widget.NestedScrollView
+    <ScrollView
         android:id="@+id/create_meeting_scrollview"
         android:layout_width="fill_parent"
         android:layout_height="match_parent">
@@ -225,6 +225,6 @@
 
         </LinearLayout>
 
-    </androidx.core.widget.NestedScrollView>
+    </ScrollView>
 
 </LinearLayout>

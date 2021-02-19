@@ -27,7 +27,8 @@ public class MeetingsRecyclerViewAdapter extends RecyclerView.Adapter<MeetingsRe
     public List<Meeting> mMeetingList;
     Meeting mMeeting;
     private final MeetingRecyclerInterface mMeetingRecyclerInterface;
-    MeetingsRecyclerViewAdapter(List<Meeting> items, MeetingRecyclerInterface pMeetingRecyclerInterface) {
+
+	MeetingsRecyclerViewAdapter(List<Meeting> items, MeetingRecyclerInterface pMeetingRecyclerInterface) {
     	mMeetingList = items;
     	mMeetingRecyclerInterface = pMeetingRecyclerInterface;
     }

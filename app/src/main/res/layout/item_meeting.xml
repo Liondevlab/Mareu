@@ -19,7 +19,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_round_24" />
+        app:srcCompat="@drawable/ic_round" />
 
     <TextView
         android:id="@+id/item_meeting_info"
@@ -54,7 +54,7 @@
         android:contentDescription="@string/trash_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="10sp"
+        android:layout_marginEnd="@dimen/margin_blocks"
         android:background="@null"
         android:tint="#3f445e"
         app:layout_constraintBottom_toBottomOf="parent"
