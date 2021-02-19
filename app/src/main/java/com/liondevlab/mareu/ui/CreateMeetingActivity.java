@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.liondevlab.mareu.R;
@@ -30,7 +31,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class CreateMeetingActivity extends AppCompatActivity implements CreateMeetingParticipantsRecyclerInterface, AdapterView.OnItemClickListener {
+public class CreateMeetingActivity extends AppCompatActivity implements CreateMeetingParticipantsRecyclerInterface,MeetingRecyclerInterface, AdapterView.OnItemClickListener {
 
 	MeetingApiService mMeetingApiService = DI.getMeetingApiService();
 	Meeting mMeeting;
@@ -64,6 +65,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements CreateMe
 			"Michel@lamzone.com");
 	private Button mValidateButton;
 	private Button mCancelButton;
+	private boolean mIsSomeFieldsEmpty;
 	private boolean mIsMeetingOverlaps;
 
 	@Override
@@ -157,28 +159,46 @@ public class CreateMeetingActivity extends AppCompatActivity implements CreateMe
 	}
 
 	private void generateMeeting() {
-		String vSubject = mEditTextSubject.getText().toString();
-		generateMeetingRoom(mMeetingRoomName);
-		getNewMeetingParticipants(mParticipantsAdded);
-		mMeetingRoom = new MeetingRoom(mMeetingRoomName, mMeetingRoomColor);
-		mStartTime = getStartTime(mStartDatePicker, mStartTimePicker);
-		mEndTime = getEndTime(mStartDatePicker, mEndTimePicker);
-		mMeeting = new Meeting(vSubject, mStartTime, mEndTime);
-		mMeeting.setLocation(mMeetingRoom);
-		mMeeting.setParticipants(mMeetingParticipants);
-		getIfMeetingOverlaps(mMeetingRoom, mStartTime, mEndTime);
-		if (mIsMeetingOverlaps) {
-			Toast.makeText(CreateMeetingActivity.this, "L'horaire sélectionné entre en conflit avec une réunion déjà programmée dans cette salle", Toast.LENGTH_LONG).show();
+		getIfSomeFieldsAreEmpty(mEditTextSubject.getText().toString(), mParticipantsAdded);
+		if (mIsSomeFieldsEmpty) {
+			NestedScrollView nsv = findViewById(R.id.create_meeting_scrollview);
+			nsv.scrollTo(0, nsv.getTop());
 		} else {
-			mMeetingApiService.createMeeting(mMeeting);
-			Toast.makeText(CreateMeetingActivity.this, "OK", Toast.LENGTH_LONG).show();
-			finish();
+			String vSubject = mEditTextSubject.getText().toString();
+			generateMeetingRoom(mMeetingRoomName);
+			getNewMeetingParticipants(mParticipantsAdded);
+			mMeetingRoom = new MeetingRoom(mMeetingRoomName, mMeetingRoomColor);
+			mStartTime = getStartTime(mStartDatePicker, mStartTimePicker);
+			mEndTime = getEndTime(mStartDatePicker, mEndTimePicker);
+			mMeeting = new Meeting(vSubject, mStartTime, mEndTime);
+			mMeeting.setLocation(mMeetingRoom);
+			mMeeting.setParticipants(mMeetingParticipants);
+			getIfMeetingOverlaps(mMeetingRoom, mStartTime, mEndTime);
+			if (mIsMeetingOverlaps) {
+				Toast.makeText(CreateMeetingActivity.this, "L'horaire sélectionné entre en conflit avec une réunion déjà programmée dans cette salle", Toast.LENGTH_LONG).show();
+			} else {
+				createMeeting(mMeeting);
+				Toast.makeText(CreateMeetingActivity.this, "OK", Toast.LENGTH_LONG).show();
+				finish();
+			}
 		}
+	}
+
+	private boolean getIfSomeFieldsAreEmpty(String subject, ArrayList<String> participantsAdded) {
+		if (mEditTextSubject.getText().toString().isEmpty()) {
+			Toast.makeText(CreateMeetingActivity.this, "Il manque le sujet de la réunion", Toast.LENGTH_LONG).show();
+			mIsSomeFieldsEmpty = true;
+		} else if (mParticipantsAdded.size() == 0) {
+			Toast.makeText(CreateMeetingActivity.this, "Il n'y a pas de participants", Toast.LENGTH_LONG).show();
+			mIsSomeFieldsEmpty = true;
+		} else {
+			mIsSomeFieldsEmpty = false;
+		}
+		return mIsSomeFieldsEmpty;
 	}
 
 	private void generateMeetingRoom(String pRoomName) {
 		mMeetingRoomName = pRoomName;
-		/*"Mario", "Luigi", "Toad", "Peach", "Daisy", "Yoshi", "Wario", "Waluigi", "Koopa", "Bowser"*/
 		switch (mMeetingRoomName) {
 			case "Mario":
 				mMeetingRoomColor = MeetingRoomColor.RED;
@@ -215,11 +235,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements CreateMe
 		}
 	}
 
-	/**
-	 * @param startDatePicker
-	 * @param startTimePicker
-	 * @return a java.util.Date
-	 */
+
 	public static java.util.Date getStartTime(DatePicker startDatePicker, TimePicker startTimePicker) {
 		Calendar calendar = Calendar.getInstance();
 		int day = startDatePicker.getDayOfMonth();
@@ -279,4 +295,13 @@ public class CreateMeetingActivity extends AppCompatActivity implements CreateMe
 		}
 	}
 
+	@Override
+	public void deleteMeeting(Meeting meeting) {
+
+	}
+
+	@Override
+	public void createMeeting(Meeting meeting) {
+		mMeetingApiService.createMeeting(meeting);
+	}
 }

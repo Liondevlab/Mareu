@@ -109,4 +109,11 @@ public class MeetingListActivity extends AppCompatActivity implements MeetingRec
 		mMeetingsRecyclerViewAdapter.notifyDataSetChanged();
 	}
 
+	@Override
+	public void createMeeting(Meeting meeting) {
+		mMeetingListAsArray.clear();
+		mMeetingListAsArray.addAll(mMeetingApiService.getMeetings());
+		mMeetingsRecyclerViewAdapter.notifyDataSetChanged();
+	}
+
 }

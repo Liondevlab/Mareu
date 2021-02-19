@@ -1,6 +1,7 @@
 package com.liondevlab.mareu.ui;
 
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,8 +24,9 @@ import java.util.List;
 
 public class MeetingsRecyclerViewAdapter extends RecyclerView.Adapter<MeetingsRecyclerViewAdapter.ViewHolder> {
 
-    private List<Meeting> mMeetingList;
-    private MeetingRecyclerInterface mMeetingRecyclerInterface;
+    public List<Meeting> mMeetingList;
+    Meeting mMeeting;
+    private final MeetingRecyclerInterface mMeetingRecyclerInterface;
     MeetingsRecyclerViewAdapter(List<Meeting> items, MeetingRecyclerInterface pMeetingRecyclerInterface) {
     	mMeetingList = items;
     	mMeetingRecyclerInterface = pMeetingRecyclerInterface;
@@ -39,19 +41,19 @@ public class MeetingsRecyclerViewAdapter extends RecyclerView.Adapter<MeetingsRe
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
-        final Meeting meeting = mMeetingList.get(position);
-        Date startTime = meeting.getStartTime();
-	    DateFormat dateFormat = new SimpleDateFormat("dd/MM HH:mm");
+        mMeeting = mMeetingList.get(position);
+        Date startTime = mMeeting.getStartTime();
+	    @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("dd/MM HH:mm");
 	    String strStartTime = dateFormat.format(startTime);
-	    holder.mItemMeetingInfo.setText(holder.itemView.getContext().getString(R.string.item_meeting_infos, meeting.getSubject(), strStartTime, meeting.getLocation().getRoomName()));
-	    holder.mItemListParticipants.setText(getMeetingParticipantsListToString(meeting.getParticipants()));
+	    holder.mItemMeetingInfo.setText(holder.itemView.getContext().getString(R.string.item_meeting_infos, mMeeting.getSubject(), strStartTime, mMeeting.getLocation().getRoomName()));
+	    holder.mItemListParticipants.setText(getMeetingParticipantsListToString(mMeeting.getParticipants()));
         holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
 	        @Override
 	        public void onClick(View v) {
-				mMeetingRecyclerInterface.deleteMeeting(meeting);
+				mMeetingRecyclerInterface.deleteMeeting(mMeeting);
 	        }
         });
-        switch (meeting.getLocation().getAvatarColor()) {
+        switch (mMeeting.getLocation().getAvatarColor()) {
             case RED:
                 holder.mItemMeetingAvatar.setColorFilter(0xFFED2939);
                 break;
@@ -83,7 +85,7 @@ public class MeetingsRecyclerViewAdapter extends RecyclerView.Adapter<MeetingsRe
                 holder.mItemMeetingAvatar.setColorFilter(0xFF8B0000);
 				break;
             default:
-                throw new IllegalStateException("Unexpected value: " + meeting.getLocation().getAvatarColor());
+                throw new IllegalStateException("Unexpected value: " + mMeeting.getLocation().getAvatarColor());
         }
     }
 

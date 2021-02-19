@@ -6,5 +6,8 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    <style name="NumberPickerStyle">
+        <item name="android:textSize">@dimen/number_picker_text_size</item>
+    </style>
 
 </resources>

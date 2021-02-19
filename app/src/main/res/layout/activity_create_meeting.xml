@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context=".ui.CreateMeetingActivity">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/create_meeting_scrollview"
         android:layout_width="fill_parent"
         android:layout_height="match_parent">
@@ -61,15 +61,15 @@
                 android:id="@+id/create_meeting_room_spinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
+                android:layout_marginStart="@dimen/margin_blocks"
+                android:layout_marginEnd="@dimen/margin_blocks"
                 android:background="@drawable/linear_border"
                 android:imeOptions="actionDone"
                 android:inputType="text"
                 android:padding="@dimen/padding" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginStart="@dimen/margin_blocks"
@@ -98,20 +98,18 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginStart="@dimen/margin_blocks"
-                android:layout_marginTop="@dimen/margin_blocks"
-                android:layout_marginEnd="@dimen/margin_blocks"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginStart="@dimen/margin_blocks"
                     android:layout_marginEnd="@dimen/margin_blocks"
+                    android:layout_marginTop="@dimen/margin_blocks"
                     android:layout_weight="1"
                     android:background="@drawable/linear_border"
                     android:orientation="vertical">
@@ -134,11 +132,12 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginStart="@dimen/margin_blocks"
                     android:layout_marginEnd="@dimen/margin_blocks"
+                    android:layout_marginTop="@dimen/margin_blocks"
                     android:layout_weight="1"
                     android:background="@drawable/linear_border"
                     android:orientation="vertical">
@@ -187,7 +186,7 @@
             <AutoCompleteTextView
                 android:id="@+id/create_meeting_autocomplete_search_participant"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginTop="@dimen/margin_blocks"
                 android:layout_weight="1"
                 android:backgroundTint="@color/colorPrimary"
@@ -210,7 +209,8 @@
                     android:backgroundTint="@color/colorCancel"
                     android:padding="@dimen/padding"
                     android:text="@string/cancel_button"
-                    android:textSize="@dimen/size_default_text" />
+                    android:textSize="@dimen/size_default_text_item"
+                    tools:ignore="ButtonStyle" />
 
                 <Button
                     android:id="@+id/create_meeting_validate_button"
@@ -219,11 +219,12 @@
                     android:backgroundTint="@color/colorValidate"
                     android:padding="@dimen/padding"
                     android:text="@string/validate_button"
-                    android:textSize="@dimen/size_default_text" />
+                    android:textSize="@dimen/size_default_text_item"
+                    tools:ignore="ButtonStyle" />
             </LinearLayout>
 
         </LinearLayout>
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>
