@@ -2,6 +2,7 @@ package com.liondevlab.mareu.ui;
 
 
 import android.annotation.SuppressLint;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +24,7 @@ import java.util.List;
 
 public class MeetingsRecyclerViewAdapter extends RecyclerView.Adapter<MeetingsRecyclerViewAdapter.ViewHolder> {
 
-    public List<Meeting> mMeetingList;
+    public final List<Meeting> mMeetingList;
     Meeting mMeeting;
     private final MeetingRecyclerInterface mMeetingRecyclerInterface;
 
@@ -42,6 +43,7 @@ public class MeetingsRecyclerViewAdapter extends RecyclerView.Adapter<MeetingsRe
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         mMeeting = mMeetingList.get(position);
+	    Log.d("List of meetings", "onBindViewHolder: " + mMeetingList.toString());
         Date startTime = mMeeting.getStartTime();
 	    @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("dd/MM HH:mm");
 	    String strStartTime = dateFormat.format(startTime);
@@ -50,7 +52,8 @@ public class MeetingsRecyclerViewAdapter extends RecyclerView.Adapter<MeetingsRe
         holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
 	        @Override
 	        public void onClick(View v) {
-				mMeetingRecyclerInterface.deleteMeeting(mMeeting);
+				mMeetingRecyclerInterface.deleteMeeting(mMeetingList.get(position));
+		        Log.d("Meeting to Delete", "onClick: " + position);
 	        }
         });
         switch (mMeeting.getLocation().getAvatarColor()) {
@@ -106,10 +109,10 @@ public class MeetingsRecyclerViewAdapter extends RecyclerView.Adapter<MeetingsRe
 
 
 	public static class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView mItemMeetingAvatar;
-        TextView mItemMeetingInfo;
-        TextView mItemListParticipants;
-        ImageButton mDeleteButton;
+        final ImageView mItemMeetingAvatar;
+        final TextView mItemMeetingInfo;
+        final TextView mItemListParticipants;
+        final ImageButton mDeleteButton;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

@@ -17,11 +17,10 @@ import java.util.List;
  * MaRéu
  * Created by LioNDeVLaB on 03/02/2021
  */
-@SuppressWarnings("FieldMayBeFinal")
 public class CreateMeetingParticipantsRecyclerView extends RecyclerView.Adapter<CreateMeetingParticipantsRecyclerView.ViewHolder> {
 
-	private List<String> mParticipantsList;
-	private CreateMeetingParticipantsRecyclerInterface mCreateMeetingParticipantsRecyclerInterface;
+	private final List<String> mParticipantsList;
+	private final CreateMeetingParticipantsRecyclerInterface mCreateMeetingParticipantsRecyclerInterface;
 	CreateMeetingParticipantsRecyclerView(List<String> items, CreateMeetingParticipantsRecyclerInterface pCreateMeetingParticipantsRecyclerInterface) {
 		mParticipantsList = items;
 		mCreateMeetingParticipantsRecyclerInterface = pCreateMeetingParticipantsRecyclerInterface;
@@ -55,8 +54,8 @@ public class CreateMeetingParticipantsRecyclerView extends RecyclerView.Adapter<
 
 	public static class ViewHolder extends RecyclerView.ViewHolder {
 		//ImageView mItemParticipantAvatar;
-		TextView mItemParticipantName;
-		ImageButton mItemDeleteButton;
+		final TextView mItemParticipantName;
+		final ImageButton mItemDeleteButton;
 
 		public ViewHolder(@NonNull View itemView) {
 			super(itemView);

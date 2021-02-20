@@ -20,7 +20,7 @@ import java.util.Locale;
  */
 public abstract class DummyMeetingGenerator {
 
-	public static List<MeetingParticipant> DUMMY_PARTICIPANTS = Arrays.asList(
+	public static final List<MeetingParticipant> DUMMY_PARTICIPANTS = Arrays.asList(
 		new MeetingParticipant(0, "Paul", "paul@lamzone.com"),
 		new MeetingParticipant(1, "Maxime", "maxime@lamzone.com"),
 		new MeetingParticipant(2, "Amandine", "amandine@lamzone.com"),
@@ -35,7 +35,7 @@ public abstract class DummyMeetingGenerator {
 		new MeetingParticipant(11, "Michel", "michel@lamzone.com")
 	);
 
-	public static List<MeetingRoom> DUMMY_MEETINGROOMS = Arrays.asList(
+	public static final List<MeetingRoom> DUMMY_MEETINGROOMS = Arrays.asList(
 			new MeetingRoom(0, "Mario", MeetingRoomColor.RED),
 			new MeetingRoom(1, "Luigi", MeetingRoomColor.GREEN),
 			new MeetingRoom(2, "Toad", MeetingRoomColor.BLUE),
@@ -48,7 +48,7 @@ public abstract class DummyMeetingGenerator {
 			new MeetingRoom(9, "Bowser", MeetingRoomColor.ORANGE)
 	);
 
-	public static List<Meeting> DUMMY_MEETINGS = Arrays.asList(
+	public static final List<Meeting> DUMMY_MEETINGS = Arrays.asList(
 			new Meeting(0, "Treasury", DUMMY_MEETINGROOMS.get(3), setStartTime("15/02/21 14:00"),
 					setEndTime("15/02/21 15:00"), getReunionParticipantsById(1, 3, 5, 7, 9, 11)),
 			new Meeting(1, "Information", DUMMY_MEETINGROOMS.get(0), setStartTime("15/02/21 16:00"),

@@ -41,7 +41,7 @@ import static org.hamcrest.core.IsNull.notNullValue;
 public class CreateMeetingTests {
 
 	@Rule
-	public ActivityTestRule<MeetingListActivity> mActivityTestRule =
+	public final ActivityTestRule<MeetingListActivity> mActivityTestRule =
 			new ActivityTestRule<>(MeetingListActivity.class);
 
 	@Before

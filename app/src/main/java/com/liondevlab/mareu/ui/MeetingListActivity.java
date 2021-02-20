@@ -26,8 +26,8 @@ public class MeetingListActivity extends AppCompatActivity implements MeetingRec
 	RecyclerView mRecyclerView;
 	FloatingActionButton mCreateMeetingButton;
 	MeetingsRecyclerViewAdapter mMeetingsRecyclerViewAdapter;
-	MeetingApiService mMeetingApiService = DI.getMeetingApiService();
-	ArrayList<Meeting> mMeetingListAsArray = new ArrayList<>();
+	final MeetingApiService mMeetingApiService = DI.getMeetingApiService();
+	final ArrayList<Meeting> mMeetingListAsArray = new ArrayList<>();
 	boolean mRoomFilterChecked = false;
 	boolean mDateFilterChecked = false;
 	String mRoomFilteredName;
@@ -104,9 +104,7 @@ public class MeetingListActivity extends AppCompatActivity implements MeetingRec
 	@Override
 	public void deleteMeeting(Meeting meeting) {
 		mMeetingApiService.deleteMeeting(meeting);
-		mMeetingListAsArray.clear();
-		mMeetingListAsArray.addAll(mMeetingApiService.getMeetings());
-		mMeetingsRecyclerViewAdapter.notifyDataSetChanged();
+		initList();
 	}
 
 }

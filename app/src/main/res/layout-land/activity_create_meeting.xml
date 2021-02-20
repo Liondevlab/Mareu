@@ -40,6 +40,7 @@
             android:backgroundTint="@color/colorPrimary"
             android:hint="@string/create_meeting_default_text_for_blank"
             android:importantForAutofill="no"
+            android:imeOptions="flagNoExtractUi"
             android:inputType="text"
             android:textAlignment="center"
             tools:ignore="LabelFor" />
@@ -181,6 +182,7 @@
 
         <AutoCompleteTextView
             android:id="@+id/create_meeting_autocomplete_search_participant"
+            android:imeOptions="flagNoExtractUi"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/margin_blocks"

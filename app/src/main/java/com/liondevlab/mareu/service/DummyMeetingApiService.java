@@ -17,12 +17,11 @@ import java.util.List;
  * MaRéu
  * Created by LioNDeVLaB on 25/01/2021
  */
-@SuppressWarnings("FieldMayBeFinal")
 public class DummyMeetingApiService implements MeetingApiService{
 
-	private ArrayList<Meeting> mMeetings = DummyMeetingGenerator.generateMeetings();
-	private List<MeetingRoom> mMeetingRooms = DummyMeetingGenerator.generateMeetingRooms();
-	private List<MeetingParticipant> mMeetingParticipants = DummyMeetingGenerator.generateMeetingParticipants();
+	private final ArrayList<Meeting> mMeetings = DummyMeetingGenerator.generateMeetings();
+	private final List<MeetingRoom> mMeetingRooms = DummyMeetingGenerator.generateMeetingRooms();
+	private final List<MeetingParticipant> mMeetingParticipants = DummyMeetingGenerator.generateMeetingParticipants();
 
 	@Override
 	public ArrayList<Meeting> getMeetings() {

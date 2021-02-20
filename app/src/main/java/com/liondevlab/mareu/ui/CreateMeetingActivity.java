@@ -33,24 +33,24 @@ import java.util.List;
 
 public class CreateMeetingActivity extends AppCompatActivity implements CreateMeetingParticipantsRecyclerInterface,MeetingRecyclerInterface, AdapterView.OnItemClickListener {
 
-	MeetingApiService mMeetingApiService = DI.getMeetingApiService();
+	final MeetingApiService mMeetingApiService = DI.getMeetingApiService();
 	Meeting mMeeting;
 	String mMeetingRoomName;
 	MeetingRoomColor mMeetingRoomColor;
 	MeetingRoom mMeetingRoom;
-	List<MeetingParticipant> mMeetingParticipants = new ArrayList<>();
+	final List<MeetingParticipant> mMeetingParticipants = new ArrayList<>();
 	RecyclerView mRecyclerView;
 	CreateMeetingParticipantsRecyclerView mCreateMeetingParticipantsRecyclerView;
 	String mParticipantSelected;
-	ArrayList<String> mParticipantsAdded = new ArrayList<>();
-	ArrayList<String> mParticipantSelectedList = new ArrayList<>();
+	final ArrayList<String> mParticipantsAdded = new ArrayList<>();
+	final ArrayList<String> mParticipantSelectedList = new ArrayList<>();
 	EditText mEditTextSubject;
 	Spinner mRoomSpinner;
 	DatePicker mStartDatePicker;
 	TimePicker mStartTimePicker, mEndTimePicker;
 	Date mStartTime, mEndTime;
 	AutoCompleteTextView mSearchParticipant;
-	List<String> mSearchParticipantsList = Arrays.asList(
+	final List<String> mSearchParticipantsList = Arrays.asList(
 			"Paul@lamzone.com",
 			"Maxime@lamzone.com",
 			"Amandine@lamzone.com",
@@ -165,12 +165,14 @@ public class CreateMeetingActivity extends AppCompatActivity implements CreateMe
 			sv.scrollTo(0, sv.getTop());
 		} else {
 			String vSubject = mEditTextSubject.getText().toString();
+			long vMeetingId = System.currentTimeMillis();
 			generateMeetingRoom(mMeetingRoomName);
 			getNewMeetingParticipants(mParticipantsAdded);
 			mMeetingRoom = new MeetingRoom(mMeetingRoomName, mMeetingRoomColor);
 			mStartTime = getStartTime(mStartDatePicker, mStartTimePicker);
 			mEndTime = getEndTime(mStartDatePicker, mEndTimePicker);
 			mMeeting = new Meeting(vSubject, mStartTime, mEndTime);
+			mMeeting.setId(vMeetingId);
 			mMeeting.setLocation(mMeetingRoom);
 			mMeeting.setParticipants(mMeetingParticipants);
 			getIfMeetingOverlaps(mMeetingRoom, mStartTime, mEndTime);
@@ -178,7 +180,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements CreateMe
 				Toast.makeText(CreateMeetingActivity.this, "L'horaire sélectionné entre en conflit avec une réunion déjà programmée dans cette salle", Toast.LENGTH_LONG).show();
 			} else {
 				createMeeting(mMeeting);
-				Toast.makeText(CreateMeetingActivity.this, "OK", Toast.LENGTH_LONG).show();
+				Toast.makeText(CreateMeetingActivity.this, "La réunion a été ajoutée", Toast.LENGTH_LONG).show();
 				finish();
 			}
 		}
@@ -259,18 +261,15 @@ public class CreateMeetingActivity extends AppCompatActivity implements CreateMe
 		return calendar.getTime();
 	}
 
-	@Override
-	public List<MeetingParticipant> getNewMeetingParticipants(@NonNull List<String> participant) {
+	private void getNewMeetingParticipants(@NonNull List<String> participant) {
 		for (int i = 0; i < participant.size(); i++) {
 			String vParticipant = participant.get(i);
 			MeetingParticipant vMeetingParticipant = new MeetingParticipant(vParticipant);
 			mMeetingParticipants.add(vMeetingParticipant);
 		}
-		return mMeetingParticipants;
 	}
 
-	@Override
-	public void addParticipantToList(String participant) {
+	private void addParticipantToList() {
 		mParticipantsAdded.add(mParticipantSelected);
 	}
 
@@ -289,7 +288,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements CreateMe
 			Toast.makeText(CreateMeetingActivity.this, "L'utilisateur est déja dans la liste...", Toast.LENGTH_LONG).show();
 			mSearchParticipant.setText("");
 		} else {
-			addParticipantToList(mParticipantSelected);
+			addParticipantToList();
 			refreshList();
 		}
 	}

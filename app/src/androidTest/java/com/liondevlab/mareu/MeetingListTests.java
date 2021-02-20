@@ -32,7 +32,7 @@ public class MeetingListTests {
 	private static final int ITEMS_COUNT = 5;
 
 	@Rule
-	public ActivityTestRule<MeetingListActivity> mActivityTestRule =
+	public final ActivityTestRule<MeetingListActivity> mActivityTestRule =
 			new ActivityTestRule<>(MeetingListActivity.class);
 
 	@Before
