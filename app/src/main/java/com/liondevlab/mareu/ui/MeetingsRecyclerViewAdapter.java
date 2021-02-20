@@ -5,7 +5,6 @@ import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -111,7 +110,6 @@ public class MeetingsRecyclerViewAdapter extends RecyclerView.Adapter<MeetingsRe
         TextView mItemMeetingInfo;
         TextView mItemListParticipants;
         ImageButton mDeleteButton;
-        Button mCreateMeetingButton;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -119,7 +117,6 @@ public class MeetingsRecyclerViewAdapter extends RecyclerView.Adapter<MeetingsRe
             mItemMeetingInfo = itemView.findViewById(R.id.item_meeting_info);
             mItemListParticipants = itemView.findViewById(R.id.item_list_participants);
             mDeleteButton = itemView.findViewById(R.id.item_list_delete_button);
-            mCreateMeetingButton = itemView.findViewById(R.id.create_meeting_button);
 
         }
     }

@@ -9,6 +9,4 @@ import com.liondevlab.mareu.model.Meeting;
 public interface MeetingRecyclerInterface {
 
 	void deleteMeeting(Meeting meeting);
-
-	void createMeeting(Meeting meeting);
 }

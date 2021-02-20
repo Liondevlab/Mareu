@@ -5,8 +5,6 @@ import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
 
-import com.liondevlab.mareu.di.DI;
-import com.liondevlab.mareu.service.MeetingApiService;
 import com.liondevlab.mareu.ui.MeetingListActivity;
 import com.liondevlab.mareu.utils.DeleteViewAction;
 
@@ -32,11 +30,10 @@ public class MeetingListTests {
 
 	//This is fixed
 	private static final int ITEMS_COUNT = 5;
-	private MeetingApiService mMeetingApiService = DI.getNewInstanceApiService();
 
 	@Rule
 	public ActivityTestRule<MeetingListActivity> mActivityTestRule =
-			new ActivityTestRule(MeetingListActivity.class);
+			new ActivityTestRule<>(MeetingListActivity.class);
 
 	@Before
 	public void setUp() {

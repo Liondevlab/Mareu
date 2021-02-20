@@ -4,7 +4,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,6 +17,7 @@ import java.util.List;
  * MaRéu
  * Created by LioNDeVLaB on 03/02/2021
  */
+@SuppressWarnings("FieldMayBeFinal")
 public class CreateMeetingParticipantsRecyclerView extends RecyclerView.Adapter<CreateMeetingParticipantsRecyclerView.ViewHolder> {
 
 	private List<String> mParticipantsList;
@@ -54,13 +54,13 @@ public class CreateMeetingParticipantsRecyclerView extends RecyclerView.Adapter<
 	}
 
 	public static class ViewHolder extends RecyclerView.ViewHolder {
-		ImageView mItemParticipantAvatar;
+		//ImageView mItemParticipantAvatar;
 		TextView mItemParticipantName;
 		ImageButton mItemDeleteButton;
 
 		public ViewHolder(@NonNull View itemView) {
 			super(itemView);
-			mItemParticipantAvatar = itemView.findViewById(R.id.item_participant_added_avatar);
+			//mItemParticipantAvatar = itemView.findViewById(R.id.item_participant_added_avatar);
 			mItemParticipantName = itemView.findViewById(R.id.item_participant_added_name);
 			mItemDeleteButton = itemView.findViewById(R.id.item_participant_added_delete_button);
 		}

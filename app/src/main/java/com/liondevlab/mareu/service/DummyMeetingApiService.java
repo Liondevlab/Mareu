@@ -1,5 +1,7 @@
 package com.liondevlab.mareu.service;
 
+import android.annotation.SuppressLint;
+
 import com.liondevlab.mareu.model.Meeting;
 import com.liondevlab.mareu.model.MeetingParticipant;
 import com.liondevlab.mareu.model.MeetingRoom;
@@ -15,6 +17,7 @@ import java.util.List;
  * MaRéu
  * Created by LioNDeVLaB on 25/01/2021
  */
+@SuppressWarnings("FieldMayBeFinal")
 public class DummyMeetingApiService implements MeetingApiService{
 
 	private ArrayList<Meeting> mMeetings = DummyMeetingGenerator.generateMeetings();
@@ -57,8 +60,7 @@ public class DummyMeetingApiService implements MeetingApiService{
 				//Check if the room name is equal to the filter
 				boolean vFilteredRoomMatch = vMeetingRoomLocation.equals(roomFiltered);
 				//Get the date of the meeting in the list and those of the filter
-				DateFormat dateFormat = new SimpleDateFormat("MM/dd/yy");
-
+				@SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("MM/dd/yy");
 				Calendar vMeetingDate = Calendar.getInstance();
 				vMeetingDate.setTime(getMeetings().get(i).getStartTime());
 				Date vMeetingCalendarToDate = vMeetingDate.getTime();
@@ -82,7 +84,7 @@ public class DummyMeetingApiService implements MeetingApiService{
 					if (vFilteredRoomMatch) {
 						mFilteredMeetings.add(getMeetings().get(i));
 					}
-				} else if (isFilteredByDate){
+				} else {
 					//If only date filter match, add meetings to list
 					if (vFilteredDateMatch) {
 						mFilteredMeetings.add(getMeetings().get(i));

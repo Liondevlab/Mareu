@@ -1,15 +1,15 @@
 package com.liondevlab.mareu;
 
 import androidx.test.espresso.contrib.PickerActions;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
 
-import com.liondevlab.mareu.di.DI;
-import com.liondevlab.mareu.service.MeetingApiService;
 import com.liondevlab.mareu.ui.MeetingListActivity;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
@@ -22,14 +22,12 @@ import static org.hamcrest.core.IsNull.notNullValue;
  * MaRéu
  * Created by LioNDeVLaB on 19/02/2021
  */
+@RunWith(AndroidJUnit4.class)
 public class FilterMeetingTests {
-	//This is fixed
-	private static final int ITEMS_COUNT = 5;
-	private MeetingApiService mMeetingApiService = DI.getNewInstanceApiService();
 
 	@Rule
 	public ActivityTestRule<MeetingListActivity> mActivityTestRule =
-			new ActivityTestRule(MeetingListActivity.class);
+			new ActivityTestRule<>(MeetingListActivity.class);
 
 	@Before
 	public void setUp() {

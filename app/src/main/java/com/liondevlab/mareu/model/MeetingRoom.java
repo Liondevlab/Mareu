@@ -21,9 +21,9 @@ public class MeetingRoom implements Serializable {
 
 	/**
 	 * Constructor
-	 * @param id
-	 * @param roomName
-	 * @param avatarColor
+	 * @param id type long unique id
+	 * @param roomName String
+	 * @param avatarColor MeetingRoomColor from enum
 	 */
 	public MeetingRoom(long id, String roomName, MeetingRoomColor avatarColor) {
 		this.id = id;
@@ -49,7 +49,7 @@ public class MeetingRoom implements Serializable {
 	}
 
 	public void setRoomName(String name) {
-		this.roomName = roomName;
+		this.roomName = name;
 	}
 
 	public MeetingRoomColor getAvatarColor() {

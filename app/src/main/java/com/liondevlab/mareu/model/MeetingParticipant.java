@@ -21,9 +21,9 @@ public class MeetingParticipant implements Serializable {
 
 	/**
 	 * Constructor
-	 * @param id
-	 * @param participantName
-	 * @param participantEmail
+	 * @param id type long unique id
+	 * @param participantName String
+	 * @param participantEmail String
 	 */
 	public MeetingParticipant(long id, String participantName, String participantEmail) {
 		this.id = id;
@@ -48,7 +48,7 @@ public class MeetingParticipant implements Serializable {
 	}
 
 	public void setParticipantName(String name) {
-		this.participantName = participantName;
+		this.participantName = name;
 	}
 
 	public String getParticipantEmail() {

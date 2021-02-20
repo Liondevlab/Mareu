@@ -8,13 +8,13 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.liondevlab.mareu.R;
@@ -112,7 +112,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements CreateMe
 		String[] roomList = new String[]{
 				"Mario", "Luigi", "Toad", "Peach", "Daisy", "Yoshi", "Wario", "Waluigi", "Koopa", "Bowser"
 		};
-		ArrayAdapter adapter = new ArrayAdapter(CreateMeetingActivity.this, android.R.layout.simple_list_item_1, roomList);
+		ArrayAdapter<String> adapter = new ArrayAdapter<>(CreateMeetingActivity.this, android.R.layout.simple_list_item_1, roomList);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		mRoomSpinner.setAdapter(adapter);
 	}
@@ -161,8 +161,8 @@ public class CreateMeetingActivity extends AppCompatActivity implements CreateMe
 	private void generateMeeting() {
 		getIfSomeFieldsAreEmpty(mEditTextSubject.getText().toString(), mParticipantsAdded);
 		if (mIsSomeFieldsEmpty) {
-			NestedScrollView nsv = findViewById(R.id.create_meeting_scrollview);
-			nsv.scrollTo(0, nsv.getTop());
+			ScrollView sv = findViewById(R.id.create_meeting_scrollview);
+			sv.scrollTo(0, sv.getTop());
 		} else {
 			String vSubject = mEditTextSubject.getText().toString();
 			generateMeetingRoom(mMeetingRoomName);
@@ -184,17 +184,16 @@ public class CreateMeetingActivity extends AppCompatActivity implements CreateMe
 		}
 	}
 
-	private boolean getIfSomeFieldsAreEmpty(String subject, ArrayList<String> participantsAdded) {
-		if (mEditTextSubject.getText().toString().isEmpty()) {
+	private void getIfSomeFieldsAreEmpty(String subject, ArrayList<String> participantsAdded) {
+		if (subject.isEmpty()) {
 			Toast.makeText(CreateMeetingActivity.this, "Il manque le sujet de la réunion", Toast.LENGTH_LONG).show();
 			mIsSomeFieldsEmpty = true;
-		} else if (mParticipantsAdded.size() == 0) {
+		} else if (participantsAdded.size() == 0) {
 			Toast.makeText(CreateMeetingActivity.this, "Il n'y a pas de participants", Toast.LENGTH_LONG).show();
 			mIsSomeFieldsEmpty = true;
 		} else {
 			mIsSomeFieldsEmpty = false;
 		}
-		return mIsSomeFieldsEmpty;
 	}
 
 	private void generateMeetingRoom(String pRoomName) {
@@ -300,8 +299,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements CreateMe
 
 	}
 
-	@Override
-	public void createMeeting(Meeting meeting) {
+	private void createMeeting(Meeting meeting) {
 		mMeetingApiService.createMeeting(meeting);
 	}
 }

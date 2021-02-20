@@ -14,7 +14,7 @@ public class DI {
 
 	/**
 	 * Get an instance on @{@link MeetingApiService}
-	 * @return
+	 * @return service
 	 */
 	public static MeetingApiService getMeetingApiService() {
 		return service;
@@ -22,7 +22,7 @@ public class DI {
 
 	/**
 	 * Get always a new instance on @{@link MeetingApiService}. Useful for tests, so we ensure the context is clean.
-	 * @return
+	 * @return new DummyMeetingApiService
 	 */
 	public static MeetingApiService getNewInstanceApiService() {
 		return new DummyMeetingApiService();

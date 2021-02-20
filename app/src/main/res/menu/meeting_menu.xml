@@ -5,6 +5,6 @@
         android:id="@+id/item_meeting_filter"
         android:icon="@drawable/ic_baseline_filter_list_24"
         app:showAsAction="ifRoom"
-        android:title="Filtrer">
+        android:title="@string/filter">
     </item>
 </menu>

@@ -10,6 +10,7 @@ import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
 
+@SuppressWarnings("rawtypes")
 public class RecyclerViewItemCountAssertion implements ViewAssertion {
 	private final Matcher<Integer> matcher;
 

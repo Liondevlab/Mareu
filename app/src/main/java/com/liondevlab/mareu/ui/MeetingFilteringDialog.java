@@ -1,6 +1,5 @@
 package com.liondevlab.mareu.ui;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -16,12 +15,11 @@ import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.liondevlab.mareu.R;
-import com.liondevlab.mareu.di.DI;
-import com.liondevlab.mareu.service.MeetingApiService;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -29,18 +27,11 @@ import java.util.Date;
 
 public class MeetingFilteringDialog extends DialogFragment {
 
-	MeetingApiService mMeetingApiService = DI.getMeetingApiService();
 	Spinner mRoomSpinner;
 	DatePicker mDatePicker;
 	CheckBox mRoomFilterCheckBox, mDateFilterCheckBox;
 	private Button mValidateButton, mCancelButton;
 	private OnValidateFilterListener mOnValidateFilterListener;
-
-	public void EditNameDialogFragment() {
-		// Empty constructor is required for DialogFragment
-		// Make sure not to add arguments to the constructor
-		// Use `newInstance` instead as shown below
-	}
 
 	public static MeetingFilteringDialog newInstance(String title) {
 		MeetingFilteringDialog frag = new MeetingFilteringDialog();
@@ -62,7 +53,7 @@ public class MeetingFilteringDialog extends DialogFragment {
 	}
 
 	@Override
-	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 		mRoomFilterCheckBox = view.findViewById(R.id.filter_by_room_checkbox);
 		mDateFilterCheckBox = view.findViewById(R.id.filter_by_date_checkbox);
@@ -77,10 +68,8 @@ public class MeetingFilteringDialog extends DialogFragment {
 	}
 
 	@Override
-	public void onAttach(Context context) {
+	public void onAttach(@NonNull Context context) {
 		super.onAttach(context);
-		Activity activity;
-		if (context instanceof Activity) activity = (Activity) context;
 		try {
 			this.mOnValidateFilterListener = (OnValidateFilterListener)context;
 		} catch (final ClassCastException e) {
@@ -100,7 +89,7 @@ public class MeetingFilteringDialog extends DialogFragment {
 				"Mario", "Luigi", "Toad", "Peach", "Daisy", "Yoshi", "Wario", "Waluigi", "Koopa", "Bowser"
 		};
 
-		ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, roomList);
+		ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, roomList);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		mRoomSpinner.setAdapter(adapter);
 
@@ -132,7 +121,7 @@ public class MeetingFilteringDialog extends DialogFragment {
 
 	/**
 	 *
-	 * @param datePicker
+	 * @param datePicker get date from date picker for filter
 	 * @return a java.util.Date
 	 */
 	public static java.util.Date getDateFromDatePicker(DatePicker datePicker){

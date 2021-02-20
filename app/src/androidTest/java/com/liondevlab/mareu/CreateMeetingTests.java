@@ -1,21 +1,23 @@
 package com.liondevlab.mareu;
 
+import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.contrib.PickerActions;
 import androidx.test.espresso.matcher.RootMatchers;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
 
-import com.liondevlab.mareu.di.DI;
-import com.liondevlab.mareu.service.MeetingApiService;
 import com.liondevlab.mareu.ui.MeetingListActivity;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
+import static androidx.test.espresso.action.ViewActions.swipeUp;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.RootMatchers.withDecorView;
@@ -34,14 +36,13 @@ import static org.hamcrest.core.IsNull.notNullValue;
  * MaRéu
  * Created by LioNDeVLaB on 19/02/2021
  */
+@SuppressWarnings("unchecked")
+@RunWith(AndroidJUnit4.class)
 public class CreateMeetingTests {
-	//This is fixed
-	private static final int ITEMS_COUNT = 5;
-	private MeetingApiService mMeetingApiService = DI.getNewInstanceApiService();
 
 	@Rule
 	public ActivityTestRule<MeetingListActivity> mActivityTestRule =
-			new ActivityTestRule(MeetingListActivity.class);
+			new ActivityTestRule<>(MeetingListActivity.class);
 
 	@Before
 	public void setUp() {
@@ -52,12 +53,16 @@ public class CreateMeetingTests {
 	/**
 	 * Trying to create a meeting without Subject list should show a toast message
 	 */
-	//TODO
 	@Test
 	public void CreateMeeting_withoutSubject_shouldShowAToastMessage() {
 		// Given : We try to create meeting without Subject or Participants
 		onView(withId(R.id.create_meeting_button)).perform(click());
 		// When : Trying to validate without subject
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		onView(withId(R.id.create_meeting_validate_button)).perform(scrollTo(), click());
 		// Then : A Toast message must appear with text : "Il manque le sujet de la réunion"
 		onView(withText("Il manque le sujet de la réunion"))
@@ -67,14 +72,14 @@ public class CreateMeetingTests {
 	/**
 	 * Trying to create a meeting without Participants should show a toast message
 	 */
-	//TODO
 	@Test
 	public void CreateMeeting_withoutParticipants_shouldShowAToastMessage() {
 		// Given : We try to create meeting without Subject or Participants
 		onView(withId(R.id.create_meeting_button)).perform(click());
 		// When : filling subject but not participants
-		onView(allOf(withId(R.id.create_meeting_subject))).perform(typeText("Subject"));
-		onView(withId(R.id.create_meeting_validate_button)).perform(scrollTo(), click());
+		onView(allOf(withId(R.id.create_meeting_subject))).perform(typeText("Subject\n"), ViewActions.closeSoftKeyboard());
+		onView(withId(R.id.create_meeting_scrollview)).perform(swipeUp());
+		onView(withId(R.id.create_meeting_validate_button)).perform( click());
 		// Then : A toast message must appear with text : "Il n'y a pas de participants"
 		onView(withText("Il n'y a pas de participants"))
 				.inRoot(withDecorView(not(is(mActivityTestRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
@@ -91,7 +96,8 @@ public class CreateMeetingTests {
 		onView(allOf(withId(R.id.create_meeting_subject))).perform(typeText("Subject"));
 		onView(withId(R.id.create_meeting_autocomplete_search_participant)).perform(scrollTo(), typeText("l"));
 		onData(equalTo("Luc@lamzone.com")).inRoot(RootMatchers.isPlatformPopup()).perform(click());
-		onView(withId(R.id.create_meeting_validate_button)).perform(scrollTo(), click());
+		onView(withId(R.id.create_meeting_scrollview)).perform(swipeUp());
+		onView(withId(R.id.create_meeting_validate_button)).perform(click());
 		// Then : The meeting list size should be 6
 		onView(withId(R.id.list_meetings)).check(withItemCount(6));
 	}

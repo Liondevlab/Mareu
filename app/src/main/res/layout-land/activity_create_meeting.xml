@@ -1,20 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/create_meeting_scrollview"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.CreateMeetingActivity">
 
-    <ScrollView
-        android:id="@+id/create_meeting_scrollview"
-        android:layout_width="fill_parent"
-        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_blocks"
+            android:gravity="center_horizontal"
+            android:text="@string/create_meeting_title"
+            android:textSize="@dimen/size_title"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_blocks"
+            android:gravity="center_horizontal"
+            android:text="@string/create_meeting_subject"
+            android:textSize="@dimen/size_default_text"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/create_meeting_subject"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_blocks"
+            android:layout_marginEnd="@dimen/margin_blocks"
+            android:backgroundTint="@color/colorPrimary"
+            android:hint="@string/create_meeting_default_text_for_blank"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:textAlignment="center"
+            tools:ignore="LabelFor" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_blocks"
+            android:gravity="center_horizontal"
+            android:text="@string/create_meeting_room_select"
+            android:textSize="@dimen/size_default_text"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/create_meeting_room_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_blocks"
+            android:layout_marginEnd="@dimen/margin_blocks"
+            android:background="@drawable/linear_border"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:padding="@dimen/padding" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="@dimen/margin_blocks"
+            android:layout_marginTop="@dimen/margin_blocks"
+            android:layout_marginEnd="@dimen/margin_blocks"
+            android:background="@drawable/linear_border"
             android:orientation="vertical">
 
             <TextView
@@ -22,59 +79,36 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_blocks"
                 android:gravity="center_horizontal"
-                android:text="@string/create_meeting_title"
-                android:textSize="@dimen/size_title"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_blocks"
-                android:gravity="center_horizontal"
-                android:text="@string/create_meeting_subject"
+                android:text="@string/create_meeting_start_date_select"
                 android:textSize="@dimen/size_default_text"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/create_meeting_subject"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_blocks"
-                android:layout_marginEnd="@dimen/margin_blocks"
-                android:backgroundTint="@color/colorPrimary"
-                android:hint="@string/create_meeting_default_text_for_blank"
-                android:importantForAutofill="no"
-                android:inputType="text"
-                android:textAlignment="center"
-                tools:ignore="LabelFor" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_blocks"
-                android:gravity="center_horizontal"
-                android:text="@string/create_meeting_room_select"
-                android:textSize="@dimen/size_default_text"
-                android:textStyle="bold" />
-
-            <Spinner
-                android:id="@+id/create_meeting_room_spinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_blocks"
-                android:layout_marginEnd="@dimen/margin_blocks"
-                android:background="@drawable/linear_border"
-                android:imeOptions="actionDone"
-                android:inputType="text"
-                android:padding="@dimen/padding" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <DatePicker
+                android:id="@+id/create_meeting_start_date_picker"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginStart="@dimen/margin_blocks"
-                android:layout_marginTop="@dimen/margin_blocks"
+                android:calendarViewShown="false"
+                android:datePickerMode="spinner"
+                android:padding="@dimen/padding" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="@dimen/margin_blocks"
+            android:layout_marginTop="@dimen/margin_blocks"
+            android:layout_marginEnd="@dimen/margin_blocks"
+            android:baselineAligned="false"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginEnd="@dimen/margin_blocks"
+                android:layout_weight="1"
                 android:background="@drawable/linear_border"
                 android:orientation="vertical">
 
@@ -83,148 +117,108 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_blocks"
                     android:gravity="center_horizontal"
-                    android:text="@string/create_meeting_start_date_select"
+                    android:text="@string/create_meeting_start_time_select"
                     android:textSize="@dimen/size_default_text"
                     android:textStyle="bold" />
 
-                <DatePicker
-                    android:id="@+id/create_meeting_start_date_picker"
+                <TimePicker
+                    android:id="@+id/create_meeting_start_time_picker"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:calendarViewShown="false"
-                    android:datePickerMode="spinner"
-                    android:padding="@dimen/padding" />
+                    android:timePickerMode="spinner" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginStart="@dimen/margin_blocks"
-                android:layout_marginTop="@dimen/margin_blocks"
-                android:layout_marginEnd="@dimen/margin_blocks"
-                android:orientation="horizontal"
-                android:baselineAligned="false">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginEnd="@dimen/margin_blocks"
-                    android:layout_weight="1"
-                    android:background="@drawable/linear_border"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_blocks"
-                        android:gravity="center_horizontal"
-                        android:text="@string/create_meeting_start_time_select"
-                        android:textSize="@dimen/size_default_text"
-                        android:textStyle="bold" />
-
-                    <TimePicker
-                        android:id="@+id/create_meeting_start_time_picker"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:timePickerMode="spinner" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginStart="@dimen/margin_blocks"
-                    android:layout_weight="1"
-                    android:background="@drawable/linear_border"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_blocks"
-                        android:gravity="center_horizontal"
-                        android:text="@string/create_meeting_end_time_select"
-                        android:textSize="@dimen/size_default_text"
-                        android:textStyle="bold" />
-
-                    <TimePicker
-                        android:id="@+id/create_meeting_end_time_picker"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:timePickerMode="spinner" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_blocks"
-                android:gravity="center_horizontal"
-                android:text="@string/create_meeting_participants_select"
-                android:textSize="@dimen/size_default_text"
-                android:textStyle="bold" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/create_meeting_added_participant_recyclerview"
-                android:name="CreateMeetingAddedParticipantRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_blocks"
-                android:layout_marginEnd="@dimen/margin_blocks"
-                android:background="@drawable/linear_border"
-                android:scrollbars="none"
-                app:layoutManager="LinearLayoutManager"
-                tools:context=".ui.CreateMeetingActivity"
-                tools:listitem="@layout/items_participants_added" />
-
-            <AutoCompleteTextView
-                android:id="@+id/create_meeting_autocomplete_search_participant"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="@dimen/margin_blocks"
                 android:layout_weight="1"
-                android:backgroundTint="@color/colorPrimary"
-                android:hint="@string/create_meeting_default_text_for_blank"
-                android:textAlignment="center" />
+                android:background="@drawable/linear_border"
+                android:orientation="vertical">
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_blocks"
+                    android:gravity="center_horizontal"
+                    android:text="@string/create_meeting_end_time_select"
+                    android:textSize="@dimen/size_default_text"
+                    android:textStyle="bold" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:layout_marginTop="@dimen/margin_blocks"
-                android:layout_marginBottom="@dimen/margin_blocks"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/create_meeting_cancel_button"
+                <TimePicker
+                    android:id="@+id/create_meeting_end_time_picker"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/colorCancel"
-                    android:padding="@dimen/padding"
-                    android:text="@string/cancel_button"
-                    android:textSize="@dimen/size_default_text_item"
-                    tools:ignore="ButtonStyle" />
-
-                <Button
-                    android:id="@+id/create_meeting_validate_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/colorValidate"
-                    android:padding="@dimen/padding"
-                    android:text="@string/validate_button"
-                    android:textSize="@dimen/size_default_text_item"
-                    tools:ignore="ButtonStyle" />
+                    android:layout_gravity="center_horizontal"
+                    android:timePickerMode="spinner" />
             </LinearLayout>
 
         </LinearLayout>
 
-    </ScrollView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_blocks"
+            android:gravity="center_horizontal"
+            android:text="@string/create_meeting_participants_select"
+            android:textSize="@dimen/size_default_text"
+            android:textStyle="bold" />
 
-</LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/create_meeting_added_participant_recyclerview"
+            android:name="CreateMeetingAddedParticipantRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_blocks"
+            android:layout_marginEnd="@dimen/margin_blocks"
+            android:background="@drawable/linear_border"
+            android:scrollbars="none"
+            app:layoutManager="LinearLayoutManager"
+            tools:context=".ui.CreateMeetingActivity"
+            tools:listitem="@layout/items_participants_added" />
+
+        <AutoCompleteTextView
+            android:id="@+id/create_meeting_autocomplete_search_participant"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/margin_blocks"
+            android:layout_weight="1"
+            android:backgroundTint="@color/colorPrimary"
+            android:hint="@string/create_meeting_default_text_for_blank"
+            android:textAlignment="center" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_blocks"
+            android:layout_marginBottom="@dimen/margin_blocks"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/create_meeting_cancel_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorCancel"
+                android:padding="@dimen/padding"
+                android:text="@string/cancel_button"
+                android:textSize="@dimen/size_default_text_item"
+                tools:ignore="ButtonStyle" />
+
+            <Button
+                android:id="@+id/create_meeting_validate_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorValidate"
+                android:padding="@dimen/padding"
+                android:text="@string/validate_button"
+                android:textSize="@dimen/size_default_text_item"
+                tools:ignore="ButtonStyle" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

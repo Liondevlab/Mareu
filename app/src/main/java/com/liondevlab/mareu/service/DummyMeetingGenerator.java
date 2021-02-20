@@ -64,9 +64,8 @@ public abstract class DummyMeetingGenerator {
 	// Set Begin and End time for Dummy meetings
 	private static Date setStartTime(String date){
 		Date startTime = new Date();
-		String stringDate = date;
 		try {
-			startTime = new SimpleDateFormat("dd/MM/yy HH:mm", Locale.getDefault()).parse(stringDate);
+			startTime = new SimpleDateFormat("dd/MM/yy HH:mm", Locale.getDefault()).parse(date);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -75,9 +74,8 @@ public abstract class DummyMeetingGenerator {
 
 	private static Date setEndTime(String date){
 		Date endTime = new Date();
-		String stringDate = date;
 		try {
-			endTime = new SimpleDateFormat("dd/MM/yy HH:mm", Locale.getDefault()).parse(stringDate);
+			endTime = new SimpleDateFormat("dd/MM/yy HH:mm", Locale.getDefault()).parse(date);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
