@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="size_title">34sp</dimen>
-    <dimen name="size_default_text">24sp</dimen>
-    <dimen name="size_default_text_item">20sp</dimen>
-    <dimen name="size_small_text_item">18sp</dimen>
+    <dimen name="size_title">32sp</dimen>
+    <dimen name="size_default_text">26sp</dimen>
+    <dimen name="size_default_text_item">24sp</dimen>
+    <dimen name="size_small_text_item">20sp</dimen>
     <dimen name="padding">10dp</dimen>
     <dimen name="margin_blocks">10dp</dimen>
     <dimen name="number_picker_text_size">15sp</dimen>
