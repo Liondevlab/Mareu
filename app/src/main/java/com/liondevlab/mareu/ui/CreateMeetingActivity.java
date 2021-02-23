@@ -92,11 +92,13 @@ public class CreateMeetingActivity extends AppCompatActivity implements CreateMe
 		addListenerOnButton();
 	}
 
+	// Set behavior of AutoCompleteTextView
 	private void initializeSearchParticipant(final AutoCompleteTextView pSearchParticipant) {
 		pSearchParticipant.setThreshold(1);
 		pSearchParticipant.setDropDownWidth(-1);
 	}
 
+	// Refresh participant list after add or suppress an item
 	private void refreshList() {
 		mParticipantSelectedList.clear();
 		mParticipantSelectedList.addAll(mParticipantsAdded);
@@ -106,9 +108,10 @@ public class CreateMeetingActivity extends AppCompatActivity implements CreateMe
 		mSearchParticipant.setText("");
 	}
 
+	// Add rooms in spinner
 	public void addRoomsInSpinner() {
 		mRoomSpinner = mRoomSpinner.findViewById(R.id.create_meeting_room_spinner);
-		//List creation for rooms in spinner
+		// List for rooms in spinner
 		String[] roomList = new String[]{
 				"Mario", "Luigi", "Toad", "Peach", "Daisy", "Yoshi", "Wario", "Waluigi", "Koopa", "Bowser"
 		};
@@ -118,7 +121,6 @@ public class CreateMeetingActivity extends AppCompatActivity implements CreateMe
 	}
 
 	public void addListenerOnButton() {
-		//mRoomSpinner = mRoomSpinner.findViewById(R.id.create_meeting_room_spinner);
 		mValidateButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -145,6 +147,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements CreateMe
 		});
 	}
 
+	// Check if meeting overlap another one by room name
 	private void getIfMeetingOverlaps(MeetingRoom meetingRoom, Date startTime, Date endTime) {
 		mIsMeetingOverlaps = false;
 		for (int i = 0; i < mMeetingApiService.getMeetings().size(); i++){
@@ -158,6 +161,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements CreateMe
 		}
 	}
 
+	// Generate meeting after gathering information
 	private void generateMeeting() {
 		getIfSomeFieldsAreEmpty(mEditTextSubject.getText().toString(), mParticipantsAdded);
 		if (mIsSomeFieldsEmpty) {
@@ -166,7 +170,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements CreateMe
 		} else {
 			String vSubject = mEditTextSubject.getText().toString();
 			long vMeetingId = System.currentTimeMillis();
-			generateMeetingRoom(mMeetingRoomName);
+			generateMeetingRoomColor(mMeetingRoomName);
 			getNewMeetingParticipants(mParticipantsAdded);
 			mMeetingRoom = new MeetingRoom(mMeetingRoomName, mMeetingRoomColor);
 			mStartTime = getStartTime(mStartDatePicker, mStartTimePicker);
@@ -186,6 +190,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements CreateMe
 		}
 	}
 
+	// Check if subject or participant list are empty
 	private void getIfSomeFieldsAreEmpty(String subject, ArrayList<String> participantsAdded) {
 		if (subject.isEmpty()) {
 			Toast.makeText(CreateMeetingActivity.this, "Il manque le sujet de la réunion", Toast.LENGTH_LONG).show();
@@ -198,7 +203,8 @@ public class CreateMeetingActivity extends AppCompatActivity implements CreateMe
 		}
 	}
 
-	private void generateMeetingRoom(String pRoomName) {
+	// Give the avatar color by room name
+	private void generateMeetingRoomColor(String pRoomName) {
 		mMeetingRoomName = pRoomName;
 		switch (mMeetingRoomName) {
 			case "Mario":
@@ -236,7 +242,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements CreateMe
 		}
 	}
 
-
+	// Transform DatePicker and TimePicker in a Date for Start
 	public static java.util.Date getStartTime(DatePicker startDatePicker, TimePicker startTimePicker) {
 		Calendar calendar = Calendar.getInstance();
 		int day = startDatePicker.getDayOfMonth();
@@ -249,6 +255,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements CreateMe
 		return calendar.getTime();
 	}
 
+	// Transform DatePicker and TimePicker in a Date for End
 	public static java.util.Date getEndTime(DatePicker startDatePicker, TimePicker endTimePicker) {
 		Calendar calendar = Calendar.getInstance();
 		int day = startDatePicker.getDayOfMonth();
@@ -260,6 +267,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements CreateMe
 
 		return calendar.getTime();
 	}
+
 
 	private void getNewMeetingParticipants(@NonNull List<String> participant) {
 		for (int i = 0; i < participant.size(); i++) {

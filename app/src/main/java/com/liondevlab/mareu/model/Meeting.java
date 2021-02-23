@@ -49,9 +49,6 @@ public class Meeting implements Serializable {
 		this.endTime = endTime;
 	}
 
-	public Meeting() {
-	}
-
 	public long getId() {
 		return id;
 	}
@@ -73,7 +70,7 @@ public class Meeting implements Serializable {
 	}
 
 	public String getMeetingRoom() {
-		return meetingRoom.toString();
+		return meetingRoom.getRoomName();
 	}
 
 	public void setLocation(MeetingRoom location) {

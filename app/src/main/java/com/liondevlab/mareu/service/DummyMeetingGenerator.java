@@ -20,6 +20,7 @@ import java.util.Locale;
  */
 public abstract class DummyMeetingGenerator {
 
+	// Generate meeting participants list
 	public static final List<MeetingParticipant> DUMMY_PARTICIPANTS = Arrays.asList(
 		new MeetingParticipant(0, "Paul", "paul@lamzone.com"),
 		new MeetingParticipant(1, "Maxime", "maxime@lamzone.com"),
@@ -35,6 +36,7 @@ public abstract class DummyMeetingGenerator {
 		new MeetingParticipant(11, "Michel", "michel@lamzone.com")
 	);
 
+	// Generate meeting rooms list
 	public static final List<MeetingRoom> DUMMY_MEETINGROOMS = Arrays.asList(
 			new MeetingRoom(0, "Mario", MeetingRoomColor.RED),
 			new MeetingRoom(1, "Luigi", MeetingRoomColor.GREEN),
@@ -48,6 +50,7 @@ public abstract class DummyMeetingGenerator {
 			new MeetingRoom(9, "Bowser", MeetingRoomColor.ORANGE)
 	);
 
+	// Generate meetings list
 	public static final List<Meeting> DUMMY_MEETINGS = Arrays.asList(
 			new Meeting(0, "Treasury", DUMMY_MEETINGROOMS.get(3), setStartTime("15/02/21 14:00"),
 					setEndTime("15/02/21 15:00"), getReunionParticipantsById(1, 3, 5, 7, 9, 11)),
@@ -61,7 +64,7 @@ public abstract class DummyMeetingGenerator {
 					setEndTime("20/02/21 11:30"), getReunionParticipantsById(0, 1, 2, 3, 5, 6, 7, 9, 11))
 			);
 
-	// Set Begin and End time for Dummy meetings
+	// Set Start and End time for Dummy meetings
 	private static Date setStartTime(String date){
 		Date startTime = new Date();
 		try {
@@ -89,7 +92,7 @@ public abstract class DummyMeetingGenerator {
 		return meetingParticipants;
 	}
 
-	// Returns lists
+	// Returns dummy lists
 	static ArrayList<Meeting> generateMeetings (){
 		return new ArrayList<>(DUMMY_MEETINGS);
 	}

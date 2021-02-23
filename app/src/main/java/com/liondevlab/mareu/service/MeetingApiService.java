@@ -16,7 +16,6 @@ public interface MeetingApiService {
 
 	/**
 	 * Get Meetings
-	 *
 	 * @return {@link ArrayList}
 	 */
 	ArrayList<Meeting> getMeetings();
@@ -33,21 +32,18 @@ public interface MeetingApiService {
 
 	/**
 	 * Get Meeting Rooms
-	 *
 	 * @return {@link List}
 	 */
 	List<MeetingRoom> getMeetingRooms();
 
 	/**
 	 * Get  Meeting Participants
-	 *
 	 * @return {@link List}
 	 */
 	List<MeetingParticipant> getMeetingParticipants();
 
 	/**
 	 * Get filtered Meetings
-	 *
 	 * @return {@link ArrayList}
 	 */
 	ArrayList<Meeting> getFilteredMeetings(boolean isFilteredByRoom, String roomFiltered, boolean isFilteredByDate, Date DateFiltered);

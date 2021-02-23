@@ -43,7 +43,6 @@ public class MeetingServiceTest {
 
 	@Test
 	public void createMeetingWithSuccess() {
-		//(long id, String subject, MeetingRoom meetingRoom, Date startTime, Date endTime, List<MeetingParticipant> participants)
 		Meeting newMeeting = new Meeting(999, "Test", service.getMeetingRooms().get(1), new Date(), new Date(), service.getMeetingParticipants());
 		service.createMeeting(newMeeting);
 		service.getMeetings();
