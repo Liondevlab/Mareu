@@ -53,7 +53,6 @@ public class CreateMeetingActivity extends AppCompatActivity implements CreateMe
 	TimePicker mStartTimePicker, mEndTimePicker;
 	Date mStartTime, mEndTime;
 	AutoCompleteTextView mSearchParticipant;
-	EditText mExternalParticipant;
 
 	final List<String> mSearchParticipantsList = Arrays.asList(
 			"Paul@lamzone.com",
@@ -68,7 +67,6 @@ public class CreateMeetingActivity extends AppCompatActivity implements CreateMe
 			"Stéphane@lamzone.com",
 			"Céline@lamzone.com",
 			"Michel@lamzone.com");
-	private Button mAddExternalParticipant;
 	private Button mValidateButton;
 	private Button mCancelButton;
 	private boolean mIsSomeFieldsEmpty;
@@ -94,6 +92,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements CreateMe
 		initializeSearchParticipant(mSearchParticipant);
 		mSearchParticipant.setAdapter(participantsList);
 		mSearchParticipant.setOnItemClickListener(this);
+		mSearchParticipant.setImeOptions(EditorInfo.IME_FLAG_NO_EXTRACT_UI);
 		addRoomsInSpinner();
 		addListenerOnButton();
 	}
