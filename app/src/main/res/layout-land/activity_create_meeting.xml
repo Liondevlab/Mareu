@@ -166,7 +166,6 @@
             android:text="@string/create_meeting_participants_select"
             android:textSize="@dimen/size_default_text"
             android:textStyle="bold" />
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/create_meeting_added_participant_recyclerview"
             android:name="CreateMeetingAddedParticipantRecyclerView"
@@ -179,10 +178,8 @@
             app:layoutManager="LinearLayoutManager"
             tools:context=".ui.CreateMeetingActivity"
             tools:listitem="@layout/items_participants_added" />
-
         <AutoCompleteTextView
             android:id="@+id/create_meeting_autocomplete_search_participant"
-            android:imeOptions="flagNoExtractUi"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/margin_blocks"
@@ -190,7 +187,6 @@
             android:backgroundTint="@color/colorPrimary"
             android:hint="@string/create_meeting_default_text_for_blank"
             android:textAlignment="center" />
-
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -1,7 +1,9 @@
 package com.liondevlab.mareu.ui;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -10,6 +12,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -76,7 +79,6 @@ public class CreateMeetingActivity extends AppCompatActivity implements CreateMe
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_create_meeting);
 		mEditTextSubject = findViewById(R.id.create_meeting_subject);
-		mAddExternalParticipant = findViewById(R.id.create_meeting_add_external_participant_button);
 		mValidateButton = findViewById(R.id.create_meeting_validate_button);
 		mCancelButton = findViewById(R.id.create_meeting_cancel_button);
 		mRoomSpinner = findViewById(R.id.create_meeting_room_spinner);
@@ -89,7 +91,6 @@ public class CreateMeetingActivity extends AppCompatActivity implements CreateMe
 		ArrayAdapter<String> participantsList = new ArrayAdapter<>(this,
 				android.R.layout.simple_dropdown_item_1line, mSearchParticipantsList);
 		mSearchParticipant = findViewById(R.id.create_meeting_autocomplete_search_participant);
-		mExternalParticipant = findViewById(R.id.create_meeting_edit_text_external_participant);
 		initializeSearchParticipant(mSearchParticipant);
 		mSearchParticipant.setAdapter(participantsList);
 		mSearchParticipant.setOnItemClickListener(this);
@@ -126,16 +127,19 @@ public class CreateMeetingActivity extends AppCompatActivity implements CreateMe
 	}
 
 	public void addListenerOnButton() {
-		mAddExternalParticipant.setOnClickListener(new View.OnClickListener() {
+		mSearchParticipant.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 			@Override
-			public void onClick(View v) {
-				mParticipantSelected = mExternalParticipant.getText().toString();
-				if (getIfExternalIsAnEmail(mParticipantSelected)) {
-					addParticipantToList();
-					refreshList();
-				} else {
-					mExternalParticipant.setTextColor(0xFFED2939);
+			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+				if(actionId == EditorInfo.IME_ACTION_DONE) {
+					mParticipantSelected = mSearchParticipant.getText().toString();
+					if (getIfExternalIsAnEmail(mParticipantSelected)) {
+						addParticipantToList();
+						refreshList();
+					} else {
+						mSearchParticipant.setTextColor(0xFFED2939);
+					}
 				}
+				return true;
 			}
 		});
 		mValidateButton.setOnClickListener(new View.OnClickListener() {
