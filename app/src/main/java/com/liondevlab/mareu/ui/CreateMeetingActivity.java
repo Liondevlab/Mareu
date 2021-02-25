@@ -50,6 +50,8 @@ public class CreateMeetingActivity extends AppCompatActivity implements CreateMe
 	TimePicker mStartTimePicker, mEndTimePicker;
 	Date mStartTime, mEndTime;
 	AutoCompleteTextView mSearchParticipant;
+	EditText mExternalParticipant;
+
 	final List<String> mSearchParticipantsList = Arrays.asList(
 			"Paul@lamzone.com",
 			"Maxime@lamzone.com",
@@ -63,6 +65,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements CreateMe
 			"Stéphane@lamzone.com",
 			"Céline@lamzone.com",
 			"Michel@lamzone.com");
+	private Button mAddExternalParticipant;
 	private Button mValidateButton;
 	private Button mCancelButton;
 	private boolean mIsSomeFieldsEmpty;
@@ -73,6 +76,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements CreateMe
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_create_meeting);
 		mEditTextSubject = findViewById(R.id.create_meeting_subject);
+		mAddExternalParticipant = findViewById(R.id.create_meeting_add_external_participant_button);
 		mValidateButton = findViewById(R.id.create_meeting_validate_button);
 		mCancelButton = findViewById(R.id.create_meeting_cancel_button);
 		mRoomSpinner = findViewById(R.id.create_meeting_room_spinner);
@@ -85,6 +89,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements CreateMe
 		ArrayAdapter<String> participantsList = new ArrayAdapter<>(this,
 				android.R.layout.simple_dropdown_item_1line, mSearchParticipantsList);
 		mSearchParticipant = findViewById(R.id.create_meeting_autocomplete_search_participant);
+		mExternalParticipant = findViewById(R.id.create_meeting_edit_text_external_participant);
 		initializeSearchParticipant(mSearchParticipant);
 		mSearchParticipant.setAdapter(participantsList);
 		mSearchParticipant.setOnItemClickListener(this);
@@ -121,6 +126,18 @@ public class CreateMeetingActivity extends AppCompatActivity implements CreateMe
 	}
 
 	public void addListenerOnButton() {
+		mAddExternalParticipant.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mParticipantSelected = mExternalParticipant.getText().toString();
+				if (getIfExternalIsAnEmail(mParticipantSelected)) {
+					addParticipantToList();
+					refreshList();
+				} else {
+					mExternalParticipant.setTextColor(0xFFED2939);
+				}
+			}
+		});
 		mValidateButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -145,6 +162,20 @@ public class CreateMeetingActivity extends AppCompatActivity implements CreateMe
 				CreateMeetingActivity.this.finish();
 			}
 		});
+	}
+
+	private boolean getIfExternalIsAnEmail(String externalEmail) {
+		String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+		if (externalEmail.matches(emailPattern))
+		{
+			Toast.makeText(getApplicationContext(),"Adresse Email valide",Toast.LENGTH_SHORT).show();
+			return true;
+		}
+		else
+		{
+			Toast.makeText(getApplicationContext(),"Adresse Email invalide", Toast.LENGTH_SHORT).show();
+			return false;
+		}
 	}
 
 	// Check if meeting overlap another one by room name

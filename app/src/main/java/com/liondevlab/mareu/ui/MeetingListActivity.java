@@ -20,7 +20,7 @@ import com.liondevlab.mareu.service.MeetingApiService;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class MeetingListActivity extends AppCompatActivity implements MeetingRecyclerInterface,MeetingFilteringDialog.OnValidateFilterListener  {
+public class MeetingListActivity extends AppCompatActivity implements MeetingRecyclerInterface, MeetingFilteringDialog.OnValidateFilterListener {
 
 	// User Interface elements
 	RecyclerView mRecyclerView;
@@ -73,6 +73,7 @@ public class MeetingListActivity extends AppCompatActivity implements MeetingRec
 		super.onResume();
 		initList();
 	}
+
 	private void configureToolbar() {
 		Toolbar toolbar = findViewById(R.id.meeting_toolbar);
 		setSupportActionBar(toolbar);

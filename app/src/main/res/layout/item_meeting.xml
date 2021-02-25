@@ -7,13 +7,13 @@
 
     <ImageView
         android:id="@+id/item_meeting_avatar"
-        android:contentDescription="@string/round_colored_avatar"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_marginStart="5dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
+        android:contentDescription="@string/round_colored_avatar"
         android:cropToPadding="false"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -25,9 +25,9 @@
         android:id="@+id/item_meeting_info"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:singleLine="true"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
+        android:singleLine="true"
         android:text="@string/item_meeting_infos"
         android:textSize="@dimen/size_default_text_item"
         android:textStyle="bold"
@@ -51,11 +51,11 @@
 
     <ImageButton
         android:id="@+id/item_list_delete_button"
-        android:contentDescription="@string/trash_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_blocks"
         android:background="@null"
+        android:contentDescription="@string/trash_icon"
         android:tint="#3f445e"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

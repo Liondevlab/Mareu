@@ -14,10 +14,13 @@
     <string name="create_meeting_start_time_select">Début :</string>
     <string name="create_meeting_end_time_select">Fin :</string>
     <string name="create_meeting_participants_select">Participants:</string>
+    <string name="create_meeting_internal_participants">Internes:</string>
+    <string name="create_meeting_external_participants">Externes:</string>
     <string name="create_meeting_participant_added_name">%1$s</string>
     <string name="cancel_button">Annuler</string>
     <string name="validate_button">Valider</string>
     <string name="round_colored_avatar">round colored avatar</string>
     <string name="trash_icon">trash icon</string>
     <string name="user_avatar">user avatar</string>
+    <string name="add_external_button">+</string>
 </resources>

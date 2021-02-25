@@ -179,6 +179,15 @@
             tools:context=".ui.CreateMeetingActivity"
             tools:listitem="@layout/items_participants_added" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_blocks"
+            android:gravity="center_horizontal"
+            android:text="@string/create_meeting_internal_participants"
+            android:textSize="@dimen/size_default_text"
+            android:textStyle="bold" />
+
         <AutoCompleteTextView
             android:id="@+id/create_meeting_autocomplete_search_participant"
             android:layout_width="match_parent"
@@ -189,6 +198,42 @@
             android:hint="@string/create_meeting_default_text_for_blank"
             android:textAlignment="center" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_blocks"
+            android:gravity="center_horizontal"
+            android:text="@string/create_meeting_external_participants"
+            android:textSize="@dimen/size_default_text"
+            android:textStyle="bold" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_blocks"
+            android:layout_marginBottom="@dimen/margin_blocks"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/create_meeting_edit_text_external_participant"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_blocks"
+                android:layout_weight="1"
+                android:backgroundTint="@color/colorPrimary"
+                android:hint="@string/create_meeting_default_text_for_blank"
+                android:textAlignment="center" />
+            <Button
+                android:id="@+id/create_meeting_add_external_participant_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_blocks"
+                android:layout_weight="1"
+                android:backgroundTint="@color/colorCancel"
+                android:padding="@dimen/padding"
+                android:text="@string/add_external_button"
+                android:textSize="@dimen/size_default_text_item"
+                tools:ignore="ButtonStyle" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

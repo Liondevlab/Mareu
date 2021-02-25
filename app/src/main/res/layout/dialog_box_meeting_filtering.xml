@@ -4,79 +4,79 @@
     android:id="@+id/filter_dialog"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/dialog_background"
     android:layout_gravity="center"
+    android:background="@drawable/dialog_background"
     android:orientation="vertical"
     app:cardCornerRadius="10dp">
 
-        <ScrollView
-            android:id="@+id/create_meeting_scrollview"
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
-            tools:ignore="UselessParent">
+    <ScrollView
+        android:id="@+id/create_meeting_scrollview"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        tools:ignore="UselessParent">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
 
-                        <TextView
-                            android:id="@+id/filter_dialog_title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginBottom="10dp"
-                            android:text="@string/filter_title"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="24sp" />
+            <TextView
+                android:id="@+id/filter_dialog_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="10dp"
+                android:text="@string/filter_title"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="24sp" />
 
-                        <CheckBox
-                            android:id="@+id/filter_by_room_checkbox"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/filter_by_room"
-                            android:textColor="@color/colorPrimary" />
+            <CheckBox
+                android:id="@+id/filter_by_room_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/filter_by_room"
+                android:textColor="@color/colorPrimary" />
 
-                        <Spinner
-                            android:id="@+id/filter_meeting_room_spinner"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:imeOptions="actionDone"
-                            android:inputType="text" />
+            <Spinner
+                android:id="@+id/filter_meeting_room_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionDone"
+                android:inputType="text" />
 
-                        <CheckBox
-                            android:id="@+id/filter_by_date_checkbox"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/filter_by_date"
-                            android:textColor="@color/colorPrimary" />
+            <CheckBox
+                android:id="@+id/filter_by_date_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/filter_by_date"
+                android:textColor="@color/colorPrimary" />
 
-                        <DatePicker
-                            android:id="@+id/filter_date_datepicker"
-                            android:theme="@style/NumberPickerStyle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:calendarTextColor="@color/colorPrimaryDark"
-                            android:calendarViewShown="false"
-                            android:datePickerMode="spinner" />
+            <DatePicker
+                android:id="@+id/filter_date_datepicker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:calendarTextColor="@color/colorPrimaryDark"
+                android:calendarViewShown="false"
+                android:datePickerMode="spinner"
+                android:theme="@style/NumberPickerStyle" />
 
-                        <Button
-                            android:id="@+id/validate_filter_button"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:backgroundTint="@color/colorValidate"
-                            android:padding="10sp"
-                            android:text="@string/validate_button" />
+            <Button
+                android:id="@+id/validate_filter_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorValidate"
+                android:padding="10sp"
+                android:text="@string/validate_button" />
 
-                        <Button
-                            android:id="@+id/cancel_filter_button"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:backgroundTint="@color/colorCancel"
-                            android:padding="10sp"
-                            android:text="@string/cancel_button" />
-                </LinearLayout>
-        </ScrollView>
+            <Button
+                android:id="@+id/cancel_filter_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorCancel"
+                android:padding="10sp"
+                android:text="@string/cancel_button" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

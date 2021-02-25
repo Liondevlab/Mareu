@@ -54,12 +54,12 @@ public class FilterMeetingTests {
 	 */
 	@Test
 	public void MeetingList_filterByDate_shouldShowOnlyMeetingsAtThisDate() {
-		// When : We filter meetings by date named "Mario"
+		// When : We filter meetings by date
 		onView(withId(R.id.item_meeting_filter)).perform(click());
 		onView(withId(R.id.filter_by_date_checkbox)).perform(click());
 		onView(withId(R.id.filter_date_datepicker)).perform(PickerActions.setDate(2021, 2, 15));
 		onView(withId(R.id.validate_filter_button)).perform(click());
-		// Then : Must be one meeting left on the view
+		// Then : Must be two meeting left on the view
 		onView(withId(R.id.list_meetings)).check(withItemCount(2));
 		// When : We filter nothing (checkbox unchecked)
 		onView(withId(R.id.item_meeting_filter)).perform(click());
